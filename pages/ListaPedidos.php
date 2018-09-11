@@ -18,11 +18,11 @@
 			      	<tbody>
 			  			<?php
 			  				$pedido = MySql::conectar()->prepare("
-			  					SELECT idpedido, cliente, nome, sobrenome, status, total
+			  					SELECT idpedido, cliente, nome, sobrenome, tb_pedido.status, total
 			  					FROM `tb_pedido` 
-			  					INNER JOIN `admin_funcionarios`
+			  					INNER JOIN `tb_funcionario`
 			  					ON id_funcionario = idfuncionario
-			  					WHERE status != 'F'
+			  					WHERE tb_pedido.status != 'F'
 			  				");
 			  				$pedido->execute();
 			  				$pedido = $pedido->fetchAll();

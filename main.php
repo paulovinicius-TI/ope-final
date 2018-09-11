@@ -33,9 +33,9 @@
 				<h2>Pedido</h2>
 				<ul>
 					<li>NÃO ESTÁ PRONTO</li>
-					<!--<li><a href="#">Novo Pedido</a></li>
+					<!-- <li><a href="#">Novo Pedido</a></li> -->
 					<li><a realtime="ListaPedidos" href="<?php echo INCLUDE_PATH;?>ListaPedidos">Listar Pedido</a></li>
-					<li><a href="#">Finalizar Pedido</a></li>-->
+					<!-- <li><a href="#">Finalizar Pedido</a></li> -->
 				</ul>
 			</div>
 			<div class="item">
