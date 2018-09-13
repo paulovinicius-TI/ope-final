@@ -29,6 +29,8 @@
                 $data['id'] = $value['idfuncionario'];
                 $data['nome'] = $value['nome'];
                 $data['sobrenome'] = $value['sobrenome'];
+                $data['email'] = $value['email'];
+                $data['senha'] = $value['senha'];
                 $data['cargo'] = $value['idcargo'];
                 $data['tel'] = $value['tel'];
                 $data['endereco'] = $value['endereco'];

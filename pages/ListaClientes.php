@@ -1,5 +1,5 @@
 <input id="pesquisaSlide" class="form-control left" placeholder="Pesquisar Funcionário" />
-<button type="button" class="btn btn-info right">+ Novo</button>
+<a href="<?php echo INCLUDE_PATH;?>CadastroCliente"><button type="button" class="btn btn-info right">+ Novo</button></a>
 <div class="clear"></div>
 <h1 class="page-header">Lista de Clientes</h1>
 				<div class="table-responsive">

@@ -41,7 +41,8 @@
 			<div class="item">
 				<h2>Cadastro</h2>
 				<ul>
-					<li>NÃO ESTÁ PRONTO</li>
+					<li><a realtime="CadastroFuncionario" href="<?php echo INCLUDE_PATH;?>CadastroFuncionario">Cadastro de Funcionário</a></li>
+					<li><a realtime="CadastroCliente" href="<?php echo INCLUDE_PATH;?>CadastroCliente">Cadastro de Cliente</a></li>
 					<!--<li><a href="#">Cadastro de Produto</a></li>-->
 				</ul>
 			</div>

@@ -10,6 +10,9 @@ $(function(){
 			case 'salvar-pessoal':
 				formulario(form,INCLUDE_PATH+'ajax/salvar-alteracao-pessoal.php','.btn-primary');
 				break;
+			case 'cadastrar-pessoal':
+				formulario(form,INCLUDE_PATH+'ajax/cadastrar-pessoal.php','.btn-primary');
+				break;
 			case 'remove-pessoal':
 				formulario(form,INCLUDE_PATH+'ajax/remove-pessoal.php','');
 				break;
@@ -30,6 +33,7 @@ function formulario(form,ajax,sit){
 			dataType: 'json',
 			data:form.serialize()
 		}).done(function(data){
+			console.log(data);
 			switch(data.formulario){
 				case 'pessoal':
 					pessoal(data);
@@ -44,6 +48,15 @@ function formulario(form,ajax,sit){
 					if(data.situacao == 1) situacao("Excluído com sucesso!",'sucess');
 					$('.modal').modal('hide');
 					break;
+				case 'cadastrar-pessoal':
+					if(data.situacao == 1) situacao("Cadastro efetuado com sucesso!",'sucess');
+					$(sit).html("Salvar");
+					$(".salvar").removeAttr("disabled");
+					$('.formatar').each (function(){
+  						this.reset();
+					});
+					break;
+
 			}
 				
 		});
@@ -71,6 +84,10 @@ function pessoal(data){
 					$('.modal-body').load(INCLUDE_PATH+'forms/excluir-cliente.php');
 					pessoalExeculte(data.acao,data);
 					break;
+				/*case 'cadstrarC':
+					$('.modal-body').load(INCLUDE_PATH+'forms/funcionario.php');
+					pessoalExeculte(data.acao,data);
+					break;*/
 
 			}
 }
@@ -79,7 +96,6 @@ function pessoal(data){
 function pessoalExeculte(tipo,data){
 	
 	switch(data['acao']){
-
 		case 'editarF':
 			var x = 0;
 			var intervalo = setInterval(function(){
@@ -88,6 +104,8 @@ function pessoalExeculte(tipo,data){
 				$(".formatar input[name='nome']").val(data['nome']);
 				$(".formatar input[name='sobrenome']").val(data['sobrenome']);
 				$(".formatar input[name='cpf']").val(data['cpf']);
+				$(".formatar input[name='email']").val(data['email']);
+				$(".formatar input[name='senha']").val(data['senha']);
 				$(".formatar input[name='telefone']").val(data['tel']);
 				$(".formatar input[name='endereco']").val(data['endereco']);
 				$(".formatar input[name='cidade']").val(data['cidade']);
