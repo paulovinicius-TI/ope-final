@@ -6,8 +6,8 @@
          <td>
             <form method="post" class="formatar">
                <input type="hidden" name="id" value="" required>
-               <input type="hidden" name="formulario" value="salvar-pessoal" required>
-               <input type="hidden" name="acao" value="alterF" required>
+               <input type="hidden" name="formulario" value="funcionario" required>
+               <input type="hidden" name="acao" value="updateF" required>
                <fieldset>
                   <table>
                      <tr>

@@ -6,8 +6,8 @@ Tem certeza que deseja exlcuir esse cliente do sistema?
          <td>
             <form method="post" class="formatar">
                <input type="hidden" name="id" value="">
-               <input type="hidden" name="formulario" value="remove-pessoal">
-               <input type="hidden" name="acao" value="removeC">
+               <input type="hidden" name="formulario" value="cliente">
+               <input type="hidden" name="acao" value="deleteC">
                
                <button type="submit" class="btn btn-primary sucess">Sim</button>
                <button type="button" class="btn btn-danger"" data-dismiss="modal">Não</button>

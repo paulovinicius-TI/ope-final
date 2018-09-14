@@ -35,7 +35,7 @@
 				          			<input type="hidden" name="id" value="<?php echo $value['idfuncionario']; ?>"/>
 
 				          			<input type="hidden" name="acao" value="editarF">
-				          			<input type="hidden" name="formulario" value="pessoal">
+				          			<input type="hidden" name="formulario" value="funcionario">
 
 						            <button class="btn btn-warning btn-xs" title="Alterar" data-toggle="modal" data-target="#myModal" type="submit">
 					              		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -44,8 +44,8 @@
 						        <form method="post" style="display: inline-block;">
 				          			<input type="hidden" name="id" value="<?php echo $value['idfuncionario']; ?>"/>
 
-				          			<input type="hidden" name="acao" value="excluirF">
-				          			<input type="hidden" name="formulario" value="pessoal">
+				          			<input type="hidden" name="acao" value="readDeleteF">
+				          			<input type="hidden" name="formulario" value="funcionario">
 
 						            <button class="btn btn-danger btn-xs" title="Remover" type="submit" data-toggle="modal" data-target="#myModal" type="submit">
 						              	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>

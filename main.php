@@ -43,6 +43,7 @@
 				<ul>
 					<li><a realtime="CadastroFuncionario" href="<?php echo INCLUDE_PATH;?>CadastroFuncionario">Cadastro de Funcionário</a></li>
 					<li><a realtime="CadastroCliente" href="<?php echo INCLUDE_PATH;?>CadastroCliente">Cadastro de Cliente</a></li>
+					<li><a realtime="CadastroCliente" href="<?php echo INCLUDE_PATH;?>CadastroProduto">Cadastro de Produto</a></li>
 					<!--<li><a href="#">Cadastro de Produto</a></li>-->
 				</ul>
 			</div>

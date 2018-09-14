@@ -7,6 +7,12 @@ $(function(){
 			case 'pessoal':
 				formulario(form,INCLUDE_PATH+'ajax/carregar-pessoal.php','');
 				break;
+			case 'cliente':
+				formulario(form,INCLUDE_PATH+'ajax/CRUD_Cliente.php','');
+				break;
+			case 'funcionario':
+				formulario(form,INCLUDE_PATH+'ajax/CRUD_Funcionario.php','');
+				break;
 			case 'salvar-pessoal':
 				formulario(form,INCLUDE_PATH+'ajax/salvar-alteracao-pessoal.php','.btn-primary');
 				break;
@@ -35,20 +41,21 @@ function formulario(form,ajax,sit){
 		}).done(function(data){
 			console.log(data);
 			switch(data.formulario){
-				case 'pessoal':
+				case 'read':
 					pessoal(data);
+					console.log(data);
 					break
-				case 'salvar-pessoal':
+				case 'update':
 					$(".salvar").removeAttr("disabled");
 					$(".btn-primary").html("Salvar");
 					if(data.situacao == 1) situacao("Formulário salvo com sucesso!",'sucess');
 					$('.modal').modal('hide');
 					break;
-				case 'remove-pessoal':
+				case 'delete':
 					if(data.situacao == 1) situacao("Excluído com sucesso!",'sucess');
 					$('.modal').modal('hide');
 					break;
-				case 'cadastrar-pessoal':
+				case 'cadastrar':
 					if(data.situacao == 1) situacao("Cadastro efetuado com sucesso!",'sucess');
 					$(sit).html("Salvar");
 					$(".salvar").removeAttr("disabled");
@@ -65,22 +72,22 @@ function formulario(form,ajax,sit){
 
 function pessoal(data){
 			switch(data.acao){
-				case 'editarF':
+				case 'readF':
 					$('.modal-body').load(INCLUDE_PATH+'forms/funcionario.php');
 					pessoalExeculte(data.acao,data);
 					break;
 
-				case 'excluirF':
+				case 'deleteF':
 					$('.modal-body').load(INCLUDE_PATH+'forms/excluir-pessoa.php');
 					pessoalExeculte(data.acao,data);
 					break;
 
-				case 'editarC':
+				case 'readC':
 					$('.modal-body').load(INCLUDE_PATH+'forms/cliente.php');
 					pessoalExeculte(data.acao,data);
 					break;
 
-				case 'excluirC':
+				case 'deleteC':
 					$('.modal-body').load(INCLUDE_PATH+'forms/excluir-cliente.php');
 					pessoalExeculte(data.acao,data);
 					break;
@@ -96,7 +103,7 @@ function pessoal(data){
 function pessoalExeculte(tipo,data){
 	
 	switch(data['acao']){
-		case 'editarF':
+		case 'readF':
 			var x = 0;
 			var intervalo = setInterval(function(){
 				$(".modal-title").html(data['nome']+' '+data['sobrenome']);
@@ -118,7 +125,7 @@ function pessoalExeculte(tipo,data){
 			},100);
 			break;
 
-		case 'excluirF':
+		case 'deleteF':
 			var x = 0;
 			var intervalo = setInterval(function(){
 				$(".modal-title").html(data['nome']);
@@ -128,7 +135,7 @@ function pessoalExeculte(tipo,data){
 			},100);
 			break;
 
-		case 'editarC':
+		case 'readC':
 			var x = 0;
 			var intervalo = setInterval(function(){
 				$(".modal-title").html(data['nome']+' '+data['sobrenome']);
@@ -147,7 +154,7 @@ function pessoalExeculte(tipo,data){
 			},100);
 			break;
 
-		case 'excluirC':
+		case 'deleteC':
 			var x = 0;
 			var intervalo = setInterval(function(){
 				$(".modal-title").html(data['nome']);

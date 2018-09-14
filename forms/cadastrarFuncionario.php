@@ -5,7 +5,7 @@
       <tr>
          <td>
             <form method="post" class="formatar">
-               <input type="hidden" name="formulario" value="cadastrar-pessoal">
+               <input type="hidden" name="formulario" value="funcionario">
                <input type="hidden" name="acao" value="cadastrarF">
                <fieldset>
                   <table>

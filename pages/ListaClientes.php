@@ -29,7 +29,7 @@
 				          			<input type="hidden" name="id" value="<?php echo $value['idcliente']; ?>"/>
 
 				          			<input type="hidden" name="acao" value="editarC">
-				          			<input type="hidden" name="formulario" value="pessoal">
+				          			<input type="hidden" name="formulario" value="cliente">
 
 						            <button class="btn btn-warning btn-xs" title="Alterar" data-toggle="modal" data-target="#myModal" type="submit">
 					              		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -38,8 +38,8 @@
 						        <form method="post" style="display: inline-block;" class="teste">
 				          			<input type="hidden" name="id" value="<?php echo $value['idcliente']; ?>"/>
 
-				          			<input type="hidden" name="acao" value="excluirC">
-				          			<input type="hidden" name="formulario" value="pessoal">
+				          			<input type="hidden" name="acao" value="readDeleteC">
+				          			<input type="hidden" name="formulario" value="cliente">
 				          			
 						            <button class="btn btn-danger btn-xs" title="Remover" type="submit" data-toggle="modal" data-target="#myModal" type="submit">
 						              	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
