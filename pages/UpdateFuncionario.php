@@ -1,12 +1,14 @@
+<?php include("../config.php");?>
 <div class="card-title mt-5 text-center">
-   <h1>Cadastrar Funcionário</h1>
+   <h1>Alterar Cadastro</h1>
    <table class="container-fluid">
    <tbody>
       <tr>
          <td>
             <form method="post" class="formatar">
-               <input type="hidden" name="formulario" value="funcionario">
-               <input type="hidden" name="acao" value="cadastrarF">
+               <input type="hidden" name="id" value="" required>
+               <input type="hidden" name="formulario" value="funcionario" required>
+               <input type="hidden" name="acao" value="updateF" required>
                <fieldset>
                   <table>
                      <tr>
@@ -14,27 +16,27 @@
                            <div class="form-group">
                               <label class="col-md-4 control-label">Nome</label>
                               <div class="col-md-8 inputGroupContainer">
-                              <input placeholder="Nome" name="nome" class="form-control" type="text"></div>
+                              <input placeholder="Nome" name="nome" class="form-control" type="text" required></div>
                            </div>
                            <div class="form-group">
                               <label class="col-md-4 control-label">CPF</label>
                               <div class="col-md-8 inputGroupContainer" >
-                              <input placeholder="CPF" name="cpf" class="form-control" type="text" maxlength="14" OnKeyPress="formatar('###.###.###-##', this)"></div>
+                              <input placeholder="CPF" name="cpf" class="form-control" type="text" maxlength="14" OnKeyPress="formatar('###.###.###-##', this)" required></div>
                            </div>
                            <div class="form-group">
                               <label class="col-md-4 control-label">Endereço</label>
                               <div class="col-md-8 inputGroupContainer">
-                              <input placeholder="Endereço" name="endereco" class="form-control" type="text"></div>
+                              <input placeholder="Endereço" name="endereco" class="form-control" type="text" required></div>
                            </div>
                            <div class="form-group">
                               <label class="col-md-4 control-label">Cidade</label>
                               <div class="col-md-8 inputGroupContainer">
-                              <input placeholder="Cidade" name="cidade" class="form-control" type="text"></div>
+                              <input placeholder="Cidade" name="cidade" class="form-control" type="text" required></div>
                            </div>
                            <div class="form-group">
                               <label class="col-md-4 control-label">Email</label>
                               <div class="col-md-8 inputGroupContainer">
-                              <input placeholder="email" name="email" class="form-control" type="email"></div>
+                              <input placeholder="email" name="email" class="form-control" type="email" required></div>
                            </div>
                         </td>
                         <td>
@@ -59,27 +61,27 @@
                            <div class="form-group">
                               <label class="col-md-4 control-label">Sobrenome</label>
                               <div class="col-md-8 inputGroupContainer">
-                              <input placeholder="Sobrenome" name="sobrenome" class="form-control" type="text"></div>
+                              <input placeholder="Sobrenome" name="sobrenome" class="form-control" type="text" required></div>
                            </div>
                            <div class="form-group">
                               <label class="col-md-4 control-label">Telefone</label>
                               <div class="col-md-8 inputGroupContainer">
-                              <input placeholder="Telefone" name="telefone" class="form-control" type="text"  maxlength="13" OnKeyPress="formatar('##-#####-####', this)"></div>
+                              <input placeholder="Telefone" name="telefone" class="form-control" type="text"  maxlength="13" OnKeyPress="formatar('##-#####-####', this)" required></div>
                            </div>
                            <div class="form-group">
                               <label class="col-md-4 control-label">Número</label>
                               <div class="col-md-8 inputGroupContainer">
-                              <input placeholder="Número" name="numero" class="form-control" type="text"></div>
+                              <input placeholder="Número" name="numero" class="form-control" type="text" required></div>
                            </div>
                            <div class="form-group">
                               <label class="col-md-4 control-label">Bairro</label>
                               <div class="col-md-8 inputGroupContainer">
-                              <input placeholder="Bairro" name="bairro" class="form-control" type="text"></div>
+                              <input placeholder="Bairro" name="bairro" class="form-control" type="text" required></div>
                            </div>
                            <div class="form-group">
                               <label class="col-md-4 control-label">Senha</label>
                               <div class="col-md-8 inputGroupContainer">
-                              <input placeholder="senha" name="senha" class="form-control" type="text"></div>
+                              <input placeholder="senha" name="senha" class="form-control" type="text" required></div>
                            </div>
                         <td>
                      </tr>

@@ -43,7 +43,10 @@
 				<ul>
 					<li><a realtime="CadastroFuncionario" href="<?php echo INCLUDE_PATH;?>CadastroFuncionario">Cadastro de Funcionário</a></li>
 					<li><a realtime="CadastroCliente" href="<?php echo INCLUDE_PATH;?>CadastroCliente">Cadastro de Cliente</a></li>
-					<li><a realtime="CadastroCliente" href="<?php echo INCLUDE_PATH;?>CadastroProduto">Cadastro de Produto</a></li>
+					<li><a realtime="CadastroProduto" href="<?php echo INCLUDE_PATH;?>CadastroProduto">Cadastro de Produto</a></li>
+					<li><a realtime="CadastroFornecedor" href="<?php echo INCLUDE_PATH;?>CadastroFornecedor">Cadastro de Fornecedor</a></li>
+					<li><a realtime="CadastroCategoria" href="<?php echo INCLUDE_PATH;?>CadastroCategoria">Cadastro de Categoria</a></li>
+					<li><a realtime="CadastroPedido" href="<?php echo INCLUDE_PATH;?>CadastroPedido">Cadastro de Pedido</a></li>
 					<!--<li><a href="#">Cadastro de Produto</a></li>-->
 				</ul>
 			</div>
@@ -54,6 +57,10 @@
 					<li><a realtime="ListaClientes" href="<?php echo INCLUDE_PATH;?>ListaClientes">Listar Cliente</a></li>
 
 					<li><a realtime="ListaFuncionarios" href="<?php echo INCLUDE_PATH;?>ListaFuncionarios">Listar Funcionários</a></li>
+
+					<li><a realtime="ListaCategoria" href="<?php echo INCLUDE_PATH;?>ListaCategoria">Listar Categoria</a></li>
+
+					<li><a realtime="ListaFornecedor" href="<?php echo INCLUDE_PATH;?>ListaFornecedor">Listar Fornecedor</a></li>
 
 					<!--<li><a realtime="ControleLucro" href="<?php echo INCLUDE_PATH;?>ControleLucro">Controle de Lucro</a></li>
 

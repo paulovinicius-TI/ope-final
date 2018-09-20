@@ -63,6 +63,9 @@
 			<div id="paginacao" class="w100">
 				<ul class="pagination"></ul>
 			</div>
+			<div class="carregar">
+				
+			</div>
     	</div>
 	</div>
 </div>

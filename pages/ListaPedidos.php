@@ -1,6 +1,5 @@
-	
 <input id="pesquisaSlide" class="form-control left" placeholder="Pesquisar Pedido" />
-<button type="button" class="btn btn-info right">+ Novo</button>
+<a href="<?php echo INCLUDE_PATH;?>CadastroPedido"><button type="button" class="btn btn-info right">+ Novo</button></a>
 <div class="clear"></div>
 <h1 class="page-header">Pedidos em Andamento</h1>
 			  <div class="table-responsive">

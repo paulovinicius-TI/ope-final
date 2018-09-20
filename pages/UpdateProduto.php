@@ -1,12 +1,14 @@
+<?php include("../config.php"); ?>
 <div class="card-title mt-5 text-center">
-   <h1>Cadastro de Produto</h1>
+   <h1>Alterar Produto</h1>
    <table class="container-fluid">
    <tbody>
       <tr>
          <td>
             <form method="post" class="formatar">
-               <input type="hidden" name="formulario" value="produto">
-               <input type="hidden" name="acao" value="cadastrarP">
+               <input type="hidden" name="id" value="" required>
+               <input type="hidden" name="formulario" value="produto" required>
+               <input type="hidden" name="acao" value="updateP" required>
                <fieldset>
                   <table>
                      <tr>
@@ -14,18 +16,18 @@
                            <div class="form-group">
                               <label class="col-md-4 control-label">Nome</label>
                               <div class="col-md-8 inputGroupContainer">
-                              <input placeholder="Nome" name="nome" class="form-control" type="text"></div>
+                              <input placeholder="Nome" name="nome" class="form-control" type="text" required></div>
                            </div>
                            <div class="form-group">
                               <label class="col-md-4 control-label">Preço Unitário</label>
                               <div class="col-md-8 inputGroupContainer">
-                              <input placeholder="Preço Unitário" name="preco" class="form-control" type="text"></div>
+                              <input placeholder="Preço Unitário" name="preco" class="form-control" type="text" required></div>
                            </div>
                         </td>
                         <tb>
                            <div class="form-group">
                               <label for="sel1">Categoria</label>
-                              <select class="form-control" id="sel1" name="categoria">
+                              <select class="form-control categoria" id="sel1" name="categoria">
                                 <option value="0">Não informado</option>
                                 <?php 
                                     $forn = MySql::conectar()->prepare("
@@ -45,11 +47,11 @@
                            <div class="form-group">
                               <label class="col-md-4 control-label">Quantidade</label>
                               <div class="col-md-8 inputGroupContainer">
-                              <input placeholder="Sobrenome" name="qtd" class="form-control" type="text"></div>
+                              <input placeholder="Quantidade" name="qtd" class="form-control" type="text" required></div>
                            </div>
                            <div class="form-group">
                               <label for="sel1">Fornecedor</label>
-                              <select class="form-control" id="sel1" name="fornecedor">
+                              <select class="form-control fornecedor" id="sel1" name="fornecedor">
                                 <option value="0">Não informado</option>
                                 <?php 
                                     $cat = MySql::conectar()->prepare("

@@ -13,6 +13,15 @@ $(function(){
 			case 'funcionario':
 				formulario(form,INCLUDE_PATH+'ajax/CRUD_Funcionario.php','');
 				break;
+			case 'produto':
+				formulario(form,INCLUDE_PATH+'ajax/CRUD_Produto.php','');
+				break;
+			case 'fornecedor':
+				formulario(form,INCLUDE_PATH+'ajax/CRUD_Fornecedor.php','');
+				break;
+			case 'categoria':
+				formulario(form,INCLUDE_PATH+'ajax/CRUD_Categoria.php','');
+				break;
 			case 'salvar-pessoal':
 				formulario(form,INCLUDE_PATH+'ajax/salvar-alteracao-pessoal.php','.btn-primary');
 				break;
@@ -73,22 +82,52 @@ function formulario(form,ajax,sit){
 function pessoal(data){
 			switch(data.acao){
 				case 'readF':
-					$('.modal-body').load(INCLUDE_PATH+'forms/funcionario.php');
+					$('.modal-body').load(INCLUDE_PATH+'pages/UpdateFuncionario.php');
 					pessoalExeculte(data.acao,data);
 					break;
 
 				case 'deleteF':
-					$('.modal-body').load(INCLUDE_PATH+'forms/excluir-pessoa.php');
+					$('.modal-body').load(INCLUDE_PATH+'pages/DeletarFuncionario.php');
 					pessoalExeculte(data.acao,data);
 					break;
 
 				case 'readC':
-					$('.modal-body').load(INCLUDE_PATH+'forms/cliente.php');
+					$('.modal-body').load(INCLUDE_PATH+'pages/UpdateCliente.php');
 					pessoalExeculte(data.acao,data);
 					break;
 
 				case 'deleteC':
-					$('.modal-body').load(INCLUDE_PATH+'forms/excluir-cliente.php');
+					$('.modal-body').load(INCLUDE_PATH+'pages/DeletarCliente.php');
+					pessoalExeculte(data.acao,data);
+					break;
+
+				case 'readForn':
+					$('.modal-body').load(INCLUDE_PATH+'pages/UpdateFornecedor.php');
+					pessoalExeculte(data.acao,data);
+					break;
+
+				case 'deleteForn':
+					$('.modal-body').load(INCLUDE_PATH+'pages/DeletarFornecedor.php');
+					pessoalExeculte(data.acao,data);
+					break;
+
+				case 'readCateg':
+					$('.modal-body').load(INCLUDE_PATH+'pages/UpdateCategoria.php');
+					pessoalExeculte(data.acao,data);
+					break;
+
+				case 'deleteCateg':
+					$('.modal-body').load(INCLUDE_PATH+'pages/DeletarCategoria.php');
+					pessoalExeculte(data.acao,data);
+					break;
+
+				case 'readProd':
+					$('.modal-body').load(INCLUDE_PATH+'pages/UpdateProduto.php');
+					pessoalExeculte(data.acao,data);
+					break;
+
+				case 'deleteProd':
+					$('.modal-body').load(INCLUDE_PATH+'pages/DeletarProduto.php');
 					pessoalExeculte(data.acao,data);
 					break;
 				/*case 'cadstrarC':
@@ -155,6 +194,81 @@ function pessoalExeculte(tipo,data){
 			break;
 
 		case 'deleteC':
+			var x = 0;
+			var intervalo = setInterval(function(){
+				$(".modal-title").html(data['nome']);
+				$(".formatar input[name='id']").val(data['id']);
+				x++;
+				if(x == 2) clearInterval(intervalo);
+			},100);
+			break;
+
+		case 'readForn':
+			var x = 0;
+			var intervalo = setInterval(function(){
+				$(".modal-title").html(data['nome']);
+				$(".formatar input[name='id']").val(data['id']);
+				$(".formatar input[name='nome']").val(data['nome']);
+				$(".formatar input[name='cnpj']").val(data['cnpj']);
+				$(".formatar input[name='email']").val(data['email']);
+				$(".formatar input[name='telefone']").val(data['tel']);
+				$(".formatar input[name='endereco']").val(data['endereco']);
+				$(".formatar input[name='cidade']").val(data['cidade']);
+				$(".formatar input[name='bairro']").val(data['bairro']);
+				$(".formatar input[name='numero']").val(data['numero']);
+				$(".formatar input[name='estado']").val(data['estado']);
+				x++;
+				if(x == 2) clearInterval(intervalo);
+			},100);
+			break;
+
+		case 'deleteForn':
+			var x = 0;
+			var intervalo = setInterval(function(){
+				$(".modal-title").html(data['nome']);
+				$(".formatar input[name='id']").val(data['id']);
+				x++;
+				if(x == 2) clearInterval(intervalo);
+			},100);
+			break;
+
+		case 'readCateg':
+			var x = 0;
+			var intervalo = setInterval(function(){
+				$(".modal-title").html(data['nome']);
+				$(".formatar input[name='nome']").val(data['nome']);
+				$(".formatar input[name='id']").val(data['id']);
+				x++;
+				if(x == 2) clearInterval(intervalo);
+			},100);
+			break;
+
+		case 'deleteCateg':
+			var x = 0;
+			var intervalo = setInterval(function(){
+				$(".modal-title").html(data['nome']);
+				$(".formatar input[name='id']").val(data['id']);
+				x++;
+				if(x == 2) clearInterval(intervalo);
+			},100);
+			break;
+
+		case 'readProd':
+			var x = 0;
+			var intervalo = setInterval(function(){
+				$(".modal-title").html(data['nome']);
+				$(".formatar input[name='id']").val(data['id']);
+				$(".formatar input[name='nome']").val(data['nome']);
+				$(".formatar input[name='qtd']").val(data['qtd']);
+				$(".formatar input[name='preco']").val(data['preco']);
+				$(".formatar .categoria option[value="+data['categoria']+"]").attr("selected",'');
+				$(".formatar .fornecedor > option[value="+data['categoria']+"]").attr("selected",'');
+				x++;
+				if(x == 2) clearInterval(intervalo);
+			},100);
+			break;
+
+		case 'deleteProd':
 			var x = 0;
 			var intervalo = setInterval(function(){
 				$(".modal-title").html(data['nome']);

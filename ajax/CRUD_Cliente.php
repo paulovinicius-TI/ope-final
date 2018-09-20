@@ -86,9 +86,9 @@
             $data['formulario'] = 'delete';
             $data['situacao'] = 1;
             $func = MySql::conectar()->prepare("
-                UPDATE `tb_cliente`
-                SET `status` = '0'
-                WHERE `idcliente` = ?
+                UPDATE tb_cliente
+                SET status = 0
+                WHERE idcliente = ?
             ");
             $func->execute(array(+$_POST['id']));
             break;
