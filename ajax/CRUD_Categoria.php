@@ -28,7 +28,7 @@
             $func = MySql::conectar()->prepare("
                                 UPDATE tb_categoria C
                                 SET
-                                    C.categoria = ?,
+                                    C.categoria = ?
                                 WHERE idcategoria = ?
                             ");
 
