@@ -84,7 +84,7 @@ body{overflow-x: hidden;}
 .top-bar{box-sizing: border-box;padding: 10px;}
 .notificacao i, .configuracao i{color: #fff; font-size: 30px; cursor: pointer;margin-left: 20px;}
 
-.foto-perfil{background-image: url('../images/logo.png');background-position: center;background-repeat: none;}
+.foto-perfil{background-image: url('../images/logo.png');background-position: center;background-repeat: no-repeat; background-size: 100%;}
 .foto-perfil{box-sizing: border-box;width:130px;height:130px;border-radius: 50%;border: 1px solid #fff;margin:30px auto;}
 
 .informacoes-perfil{margin-bottom:30px;}

@@ -1,5 +1,5 @@
 <div class="card-title mt-5 text-center">
-   <h1>Cadastrar Categoria</h1>
+   <h1>Cadastrar Fornecedor</h1>
    <table class="container-fluid">
    <tbody>
       <tr>
