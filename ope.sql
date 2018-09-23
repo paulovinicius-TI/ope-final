@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 20-Set-2018 às 10:04
+-- Generation Time: 23-Set-2018 às 21:31
 -- Versão do servidor: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `tb_categoria` (
 
 INSERT INTO `tb_categoria` (`idcategoria`, `categoria`, `status`) VALUES
 (1, 'Perecível', b'1'),
-(2, 'teste', b'0');
+(2, 'teste', b'1');
 
 -- --------------------------------------------------------
 
