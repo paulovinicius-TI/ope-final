@@ -293,3 +293,7 @@ function situacao(text,classe){
 		element.fadeOut();
 	},3000)
 }
+
+function ativarCliente(){
+	$(".cadastro").css("display:none;");
+}

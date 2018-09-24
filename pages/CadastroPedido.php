@@ -10,17 +10,24 @@
                <fieldset>
                   <table>
                      <tr>
-                        <td>                              <label class="col-md-4 control-label">Cliente cadastrado?</label></td>
+                        <td> <label class="col-md-4 control-label">Cliente cadastrado?</label></td>
                         <td>
-                           
-                              
-                              <label for="s">Sim</label><input placeholder="Nome" name="nome" class="form-control" id="s" type="radio">
-                 
+                              <label for="s">Sim</label><input placeholder="Nome" name="cadastrado" class="form-control" id="s" type="radio" value="1">
                         <td>
                         <td>
-                           <label for="n">Não</label><input placeholder="Nome" name="nome" class="form-control" id="n" type="radio"></div>
+                           <label for="n">Não</label><input placeholder="Nome" name="cadastrado" class="form-control" id="n" type="radio" onclick="ativarCliente()" value="0"></div>
                         </td>
                      </tr>
+                     <tr>
+                     
+                        <td>
+                           <form class="cadastro">
+                              <input type="" name="cliente">
+                              <input type="submit" name="pesquisar" value="Pesquisar">
+                           </form>
+                        </td>
+                     </tr>
+                     
                   </table>
                </fieldset>
                <button type="submit" class="btn btn-primary salvar">Salvar</button>

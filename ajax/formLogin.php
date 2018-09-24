@@ -20,6 +20,7 @@
         $_SESSION['login'] = true;
         $_SESSION['user'] = $user;
         $_SESSION['password'] = $password;
+        $_SESSION['id'] = $info['idfuncionario'];
         $_SESSION['name'] = $info['nome'].' '.$info['sobrenome'];
         $_SESSION['cargo'] = $info['cargo'];
         $data['situacao'] = 1;

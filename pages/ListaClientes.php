@@ -22,8 +22,8 @@
 								foreach ($clientes as $key => $value):
 							?>
 				        <tr>
-				          <th><?php echo $value['cpf'] ?></th>
-				          <td><?php echo $value['nome'] ?></td>
+				          <th><?php echo $value['cpf'];?></th>
+				          <td><?php echo $value['nome'];?></td>
 				          <td>
 				          		<form method="post" style="display: inline-block;" class="teste">
 				          			<input type="hidden" name="id" value="<?php echo $value['idcliente']; ?>"/>
@@ -45,6 +45,10 @@
 						              	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 						            </button>
 					            </form>
+					            <a href="<?php echo INCLUDE_PATH;?>ClienteCadastrado?id=<?php echo $value['idcliente'];?>"><button class="btn btn-warning btn-xs" title="Alterar" data-toggle="modal" data-target="#myModal" type="submit">
+					              		<strong>P</strong>
+					            </button>
+						        </button>
 				          </td>
 				        </tr>
 				    <?php endforeach;?>
