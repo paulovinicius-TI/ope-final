@@ -21,7 +21,7 @@
                            <div class="form-group">
                               <label class="col-md-4 control-label">CNPJ</label>
                               <div class="col-md-8 inputGroupContainer" >
-                              <input placeholder="CNPJ" name="cnpj" class="form-control" type="text" maxlength="14" OnKeyPress="formatar('###.###.###-##', this)" required></div>
+                              <input placeholder="CNPJ" name="cnpj" class="form-control" type="text" maxlength="18" OnKeyPress="formatar('##.###.###/####-##', this)" required></div>
                            </div>
                            <div class="form-group">
                               <label class="col-md-4 control-label">Endereço</label>
