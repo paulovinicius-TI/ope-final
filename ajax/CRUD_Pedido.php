@@ -2,50 +2,83 @@
     include('../config.php');
 
     $data = array();
-    $id = +$_POST['id'];
+    //$id = +$_POST['id'];
     $acao = $_POST['acao'];
 
-
-    $data['formulario'] = 'pessoal';
-
     switch ($acao){
-        case 'editarC':
-            $func = MySql::conectar()->prepare("
-                SELECT *
-                FROM tb_cliente C
-                INNER JOIN tb_cliente_endereco E
-                ON C.idcliente = E.id_cliente
-                INNER JOIN tb_cliente_telefone T
-                ON C.idcliente = T.id_cliente
-                WHERE idcliente = ?"
+        case 'adicionar':
+            $data['formulario'] = 'adicionarProd';
+            $produto = MySql::conectar()->prepare("
+                SELECT estoque
+                FROM tb_produto
+                WHERE idproduto = ?"
             );
-            $func->execute(array($id));
-            $func = $func->fetchAll();
-            foreach ($func as $key => $value) {
-                $data['acao'] = 'editarC';
-                $data['id'] = $value['idcliente'];
-                $data['cpf'] = $value['cpf'];
-                $data['nome'] = $value['nome'];
-                $data['sobrenome'] = $value['sobrenome'];
-                $data['tel'] = $value['tel'];
-                $data['endereco'] = $value['endereco'];
-                $data['cidade'] = $value['cidade'];
-                $data['bairro'] = $value['bairro'];
-                $data['numero'] = $value['numero'];
-                $data['estado'] = $value['estado'];
+            $produto->execute(array($_POST['idproduto']));
+            $produto = $produto->fetch();
+
+            if($produto['estoque'] >= +$_POST['qtd']){
+                $sql = MySql::conectar()->prepare("
+                    UPDATE tb_produto
+                    SET estoque = ?
+                    WHERE idproduto = ?"
+                );
+                $sql->execute(array($produto['estoque'] - +$_POST['qtd'],$_POST['idproduto']));
+
+                $prod = MySql::conectar()->prepare("
+                    SELECT id_produto, id_pedido, qtd FROM tb_produto_pedido WHERE id_pedido = ? AND id_produto = ?"
+                );
+                $prod->execute(array(+$_POST['idpedido'],+$_POST['idproduto']));
+
+                if($prod->rowCount() == 1){
+                    $prod = $prod->fetch();
+                    $addQtd = MySql::conectar()->prepare("
+                        UPDATE tb_produto_pedido
+                        SET 
+                                qtd = ?,
+                                status = 1
+                        WHERE id_pedido = ? AND id_produto = ?"
+                    );
+                    
+                    $addQtd->execute(array($prod['qtd'] + +$_POST['qtd'],+$_POST['idpedido'],+$_POST['idproduto']));
+                }else{
+                    $prod = $prod->fetch();
+                    $addQtd = MySql::conectar()->prepare("
+                        INSERT INTO tb_produto_pedido
+                        (qtd,id_pedido,id_produto,status) VALUES (?,?,?,1)"
+                    );
+                    $addQtd->execute(array($_POST['qtd'], +$_POST['idpedido'],+$_POST['idproduto']));
+                }
+
+                $data['situacao'] = 1;
             }
             break;
 
-        case 'excluirC':
-            $func = MySql::conectar()->prepare("SELECT * FROM `tb_cliente` WHERE idcliente = ?");
-            $func->execute(array($id));
-            $func = $func->fetchAll();
-            foreach ($func as $key => $value) {
-                $data['id'] = $value['idcliente'];
-                $data['acao'] = 'excluirC';
-                $data['nome'] = $value['nome'].' '.$value['sobrenome'];
-            }
-            break;
+        case 'remover':
+            $data['formulario'] = 'removerProd';
+            $produto = MySql::conectar()->prepare("
+                SELECT estoque
+                FROM tb_produto
+                WHERE idproduto = ?"
+            );
+            $produto->execute(array($_POST['idproduto']));
+            $produto = $produto->fetch();
+
+                $sql = MySql::conectar()->prepare("
+                    UPDATE tb_produto
+                    SET estoque = ?
+                    WHERE idproduto = ?"
+                );
+                $sql->execute(array($produto['estoque'] + +$_POST['qtd'],+$_POST['idproduto']));
+
+                $sql = MySql::conectar()->prepare("
+                    UPDATE tb_produto_pedido
+                    SET 
+                        status = 0,
+                        qtd = 0
+                    WHERE id_pedido = ? AND id_produto = ?"
+                );
+                $sql->execute(array(+$_POST['idpedido'],+$_POST['idproduto']));
+            $data['situacao'] = 1;
 
     }
 

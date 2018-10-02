@@ -1,5 +1,5 @@
 <div class="card-title mt-5 text-center">
-   <h1>Cadastro de Pedido</h1>
+   <h1>Editar Pedido</h1>
    <table class="container-fluid">
    <tbody>
       <tr>
@@ -7,76 +7,15 @@
             <?php 
               date_default_timezone_set('America/Sao_Paulo');
               $date = date('Y-m-d');
-              $client = MySql::conectar()->prepare("
-                  SELECT *
-                  FROM tb_cliente
-                  WHERE idcliente = ?"
-              );
-              $client->execute(array(+$_GET['id']));
               $func = MySql::conectar()->prepare("
-                  SELECT idfuncionario,nome
+                  SELECT nome,cliente
                   FROM tb_funcionario
-                  WHERE idfuncionario = ?"
+                  INNER JOIN tb_pedido PED
+                  ON PED.idpedido = ?
+                  WHERE PED.idpedido = ?"
               );
-              $func->execute(array(+$_SESSION['id']));
-              $client = $client->fetch();
+              $func->execute(array(+$_GET['pedido'],+$_GET['pedido']));
               $func = $func->fetch();
-
-
-            $pedido = MySql::conectar()->prepare("
-                SELECT *
-                FROM tb_pedido
-                WHERE status = 'C' AND id_funcionario = ?" // Não Alocado
-            );
-            $pedido->execute(array(+$_SESSION['id']));
-
-            if($pedido->rowCount() == 1){
-              $pedido = $pedido->fetch();
-              
-              $sql = MySql::conectar()->prepare("
-                                UPDATE tb_pedido P
-                                INNER JOIN tb_aux_pedido AP
-                                ON P.idpedido = AP.id_pedido
-                                SET
-                                    P.clienteCad = 1,
-                                    P.cliente = ?,
-                                    AP.id_cliente = ?
-                                WHERE idpedido = ?
-                            ");
-
-              $sql->execute(array(
-                $client['nome'].' '.$client['sobrenome'],
-                +$_GET['id'],
-                +$pedido['idpedido']
-              ));
-            }else{
-              $sql = MySql::conectar()->prepare("  
-                  INSERT INTO tb_pedido(cliente,id_funcionario,status,clienteCad,total) VALUES (?,?,'C',1,0);
-                  ");
-
-              $sql->execute(array(
-                  $client['nome'].' '.$client['sobrenome'],
-                  $_SESSION['id']));
-
-              $pedido = MySql::conectar()->prepare("  
-                    SELECT *
-                    FROM tb_pedido
-                    WHERE status = 'C' AND id_funcionario = ?
-                  ");
-
-              $pedido->execute(array(
-                  +$_SESSION['id']));
-
-              $pedido = $pedido->fetch();
-
-              $p = MySql::conectar()->prepare("  
-                  INSERT INTO tb_aux_pedido(id_pedido,id_cliente) VALUES (?,?);
-                  ");
-
-              $p->execute(array(
-                  $pedido['idpedido'],
-                  $client['idcliente']));
-            }
             ?>
             <form method="post" class="formatar">
                <input type="hidden" name="formulario" value="cliente">
@@ -88,12 +27,12 @@
                            <div class="form-group">
                               <label class="col-md-4 control-label">Nº Pedido</label>
                               <div class="col-md-8 inputGroupContainer">
-                              <input placeholder="Nome" name="nome" class="form-control" type="text" disabled value="<?php echo $pedido['idpedido'];?>"></div>
+                              <input placeholder="Nome" name="nome" class="form-control" type="text" disabled value="<?php echo $_GET['pedido'];?>"></div>
                            </div>
                            <div class="form-group">
                               <label class="col-md-4 control-label">Cliente</label>
                               <div class="col-md-8 inputGroupContainer">
-                              <input placeholder="Nome" name="nome" class="form-control" type="text" disabled value="<?php echo $client['nome'];?>"></div>
+                              <input placeholder="Nome" name="nome" class="form-control" type="text" disabled value="<?php echo $func['cliente'];?>"></div>
                            </div>
                         <td>
                            <div class="form-group">
@@ -101,12 +40,6 @@
                               <div class="col-md-8 inputGroupContainer">
                               <input placeholder="Endereço" name="endereco" class="form-control" type="text" disabled value="<?php echo $func['nome'];?>"></div>
                            </div>
-                           <div class="form-group">
-                              <label class="col-md-4 control-label">CPF</label>
-                              <div class="col-md-8 inputGroupContainer" >
-                              <input placeholder="CPF" name="cpf" class="form-control" type="text" maxlength="14" OnKeyPress="formatar('###.###.###-##', this)" value="<?php echo $client['cpf'];?>" disabled></div>
-                           </div>
-                        <td>
                      </tr>
                   </table>
                </fieldset>
@@ -116,7 +49,6 @@
    </tbody>
    </table>
 </div>
-
 <div class="w100 left" style="margin-top: 50px;">
    <table class="table" id="pedido">
      <thead class="thead-dark">
@@ -136,14 +68,17 @@
               ON PROD.idproduto = PED.id_produto
               WHERE id_pedido = ? AND PED.status != 0"
           );
-          $produto->execute(array($pedido['idpedido']));
+          $produto->execute(array(+$_GET['pedido']));
+
           $sql = MySql::conectar()->prepare("
             UPDATE tb_pedido P
             SET total = ?
             WHERE idpedido = ?
           ");
+
           $total = 0;
-          $data = [];
+          $data = array();
+
           $produto = $produto->fetchAll();
           foreach ($produto as $key => $value):
             $total += $value['qtd'] * $value['preco_unit'];
@@ -161,7 +96,7 @@
                   <td>
                     
                       <input type="hidden" name="idproduto" value="<?php echo $value['idproduto']; ?>"/>
-                      <input type="hidden" name="idpedido" value="<?php echo $pedido['idpedido']; ?>"/>
+                      <input type="hidden" name="idpedido" value="<?php echo $_GET['pedido']; ?>"/>
 
                       <input type="hidden" name="acao" value="remover">
                       <input type="hidden" name="formulario" value="pedido">
@@ -174,15 +109,15 @@
        </tr>
      <?php endforeach;
      $json_php = json_encode($data);
-    $sql->execute(array($total, $pedido['idpedido']));
+    $sql->execute(array($total, +$_GET['pedido']));
     ?>
      </tbody>
    </table>
    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"  >+ Produto</button>
    <?php if($total != 0):?>
-     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalCancelarPed"  >Desistir do Pedido</button>
-     <button type="button" class="btn" onclick="gerarPedido(<?php echo $pedido['idpedido'].','.$_GET['id'];?>)">Gerar Pedido</button>
-     <?php endif;?>
+     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalCancelarPed"  >Cancelar Pedido</button>
+     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" disabled >Fechar compra</button>
+    <?php endif;?>
    <p class="right">Total: R$ <?php echo $total;?></p>
 </div>
 <div class="clear"></div>
@@ -237,7 +172,7 @@
                     <td>
                       
                         <input type="hidden" name="idproduto" value="<?php echo $value['idproduto']; ?>"/>
-                        <input type="hidden" name="idpedido" value="<?php echo $pedido['idpedido']; ?>"/>
+                        <input type="hidden" name="idpedido" value="<?php echo $_GET['pedido']; ?>"/>
 
                         <input type="hidden" name="acao" value="adicionar">
                         <input type="hidden" name="formulario" value="pedido">
@@ -267,44 +202,33 @@
   </div>   
 </div>
 
+
+
 <div class="modal fade" id="ModalCancelarPed" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h1>Desistir do pedido</h1>
+        <h1>Cancelar pedido</h1>
       </div>
       <div class="modal-body">
-        <p>Tem Certeza que deseja desistir deste pedido?</p>
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalCancelarPed" onClick='cancelarPedido(<?php echo($pedido['idpedido'].','.$json_php);?>)'>Sim</button>
+        <p>Tem Certeza que deseja cancelar este pedido?</p>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalCancelarPed" onClick='cancelarPedido(<?php echo($_GET['pedido'].','.$json_php);?>)'>Sim</button>
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalCancelarPed">Não</button>
       </div>
     </div>
   </div>   
 </div>
-
 <script type="text/javascript">
   function cancelarPedido(idpedido,$produtos){
     console.log(idpedido);
       $.ajax({
-        url:'<?php echo INCLUDE_PATH;?>pages/DesistirPedido.php',
+        url:'<?php echo INCLUDE_PATH;?>pages/CancelarPedido.php',
         method:'post',
         dataType: 'json',
         data: {'idpedido':idpedido,'produtos':$produtos}
       }).done(function(data){
-        alert("Pedido não gerado!");
-        window.location.href = data.local;
-      });
-  }
-
-  function gerarPedido(idpedido){
-      $.ajax({
-        url:'<?php echo INCLUDE_PATH;?>pages/pedido.php',
-        method:'post',
-        dataType: 'json',
-        data: {'idpedido':idpedido,'type':1}
-      }).done(function(data){
-        alert("Pedido gerado com sucesso!");
+        alert("Pedido cancelado com sucesso!");
         window.location.href = data.local;
       });
   }

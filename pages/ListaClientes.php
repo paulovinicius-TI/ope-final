@@ -46,9 +46,10 @@
 						            </button>
 					            </form>
 					            <a href="<?php echo INCLUDE_PATH;?>ClienteCadastrado?id=<?php echo $value['idcliente'];?>"><button class="btn btn-warning btn-xs" title="Alterar" data-toggle="modal" data-target="#myModal" type="submit">
-					              		<strong>P</strong>
+					              		<strong>Abrir Pedido</strong>
+
 					            </button>
-						        </button>
+						        </a>
 				          </td>
 				        </tr>
 				    <?php endforeach;?>

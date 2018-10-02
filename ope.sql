@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 23-Set-2018 às 21:31
+-- Generation Time: 02-Out-2018 às 04:19
 -- Versão do servidor: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -52,14 +52,16 @@ CREATE TABLE IF NOT EXISTS `tb_aux_pedido` (
   `id_pedido` int(11) NOT NULL,
   `id_cliente` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
 
 --
 -- Extraindo dados da tabela `tb_aux_pedido`
 --
 
 INSERT INTO `tb_aux_pedido` (`id`, `id_pedido`, `id_cliente`) VALUES
-(1, 2, 1);
+(28, 30, 0),
+(29, 31, 0),
+(30, 32, 3);
 
 -- --------------------------------------------------------
 
@@ -79,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `tb_cargo` (
 
 INSERT INTO `tb_cargo` (`idcargo`, `cargo`) VALUES
 (1, 'Administrador'),
-(2, 'Funcionário 3'),
+(2, 'Funcionário'),
 (3, 'Cozinheiro');
 
 -- --------------------------------------------------------
@@ -116,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `tb_cliente` (
   `cpf` varchar(50) NOT NULL,
   `status` bit(1) NOT NULL,
   PRIMARY KEY (`idcliente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Extraindo dados da tabela `tb_cliente`
@@ -124,7 +126,9 @@ CREATE TABLE IF NOT EXISTS `tb_cliente` (
 
 INSERT INTO `tb_cliente` (`idcliente`, `nome`, `sobrenome`, `cpf`, `status`) VALUES
 (1, 'Vinicius', 'Oliveira', '22494676843', b'1'),
-(3, 'ope', 'ope', 'ope', b'1');
+(3, 'ope', 'ope', '000.000.000-00', b'1'),
+(4, 'test', 'test', 'test', b'1'),
+(5, 'Lucas', 'test', '654.654.654-65', b'1');
 
 -- --------------------------------------------------------
 
@@ -141,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `tb_cliente_endereco` (
   `estado` char(2) NOT NULL,
   `id_cliente` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Extraindo dados da tabela `tb_cliente_endereco`
@@ -149,7 +153,9 @@ CREATE TABLE IF NOT EXISTS `tb_cliente_endereco` (
 
 INSERT INTO `tb_cliente_endereco` (`id`, `endereco`, `numero`, `cidade`, `bairro`, `estado`, `id_cliente`) VALUES
 (1, 'Rua São paulo', '222', 'Arujá', 'Jd real', 'SP', 1),
-(2, 'ope', '333', 'ope', 'ope', 'SP', 3);
+(2, 'ope', '333', 'ope', 'ope', 'SP', 3),
+(3, 'test', 'test', 'tet', 'test', 'SP', 4),
+(4, 'L test', '321', 'L test', 'L test', 'SP', 5);
 
 -- --------------------------------------------------------
 
@@ -162,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `tb_cliente_telefone` (
   `id_cliente` int(11) NOT NULL,
   `tel` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Extraindo dados da tabela `tb_cliente_telefone`
@@ -170,7 +176,9 @@ CREATE TABLE IF NOT EXISTS `tb_cliente_telefone` (
 
 INSERT INTO `tb_cliente_telefone` (`id`, `id_cliente`, `tel`) VALUES
 (1, 1, '46522937'),
-(2, 3, 'ope');
+(2, 3, 'ope'),
+(3, 4, 'test'),
+(4, 5, '65-46561-3521');
 
 -- --------------------------------------------------------
 
@@ -236,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `tb_fornecedor` (
   `email` varchar(255) NOT NULL,
   `status` bit(1) NOT NULL,
   PRIMARY KEY (`idfornecedor`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Extraindo dados da tabela `tb_fornecedor`
@@ -244,7 +252,8 @@ CREATE TABLE IF NOT EXISTS `tb_fornecedor` (
 
 INSERT INTO `tb_fornecedor` (`idfornecedor`, `fornecedor`, `cnpj`, `email`, `status`) VALUES
 (1, 'Skol', '00123456', 'skol@skol.com', b'1'),
-(2, 'Danone', '0231321', 'danone@danone.com', b'1');
+(2, 'Danone', '0231321', 'danone@danone.com', b'1'),
+(3, 'test', 'test', 'test@test.com', b'1');
 
 -- --------------------------------------------------------
 
@@ -261,7 +270,7 @@ CREATE TABLE IF NOT EXISTS `tb_fornecedor_endereco` (
   `estado` char(2) NOT NULL,
   `id_fornecedor` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Extraindo dados da tabela `tb_fornecedor_endereco`
@@ -269,7 +278,8 @@ CREATE TABLE IF NOT EXISTS `tb_fornecedor_endereco` (
 
 INSERT INTO `tb_fornecedor_endereco` (`id`, `endereco`, `numero`, `cidade`, `bairro`, `estado`, `id_fornecedor`) VALUES
 (1, 'Teste', '98', 'Teste', 'teste', 'SP', 1),
-(2, 'teste', '54', 'teste', 'teste', 'SP', 2);
+(2, 'teste', '54', 'teste', 'teste', 'SP', 2),
+(3, 'test', 'test', 'test', 'test', 'SP', 3);
 
 -- --------------------------------------------------------
 
@@ -282,7 +292,7 @@ CREATE TABLE IF NOT EXISTS `tb_fornecedor_telefone` (
   `id_fornecedor` int(11) NOT NULL,
   `tel` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Extraindo dados da tabela `tb_fornecedor_telefone`
@@ -290,7 +300,8 @@ CREATE TABLE IF NOT EXISTS `tb_fornecedor_telefone` (
 
 INSERT INTO `tb_fornecedor_telefone` (`id`, `id_fornecedor`, `tel`) VALUES
 (1, 1, '40028922'),
-(2, 2, '321564');
+(2, 2, '321564'),
+(3, 3, 'test');
 
 -- --------------------------------------------------------
 
@@ -308,7 +319,7 @@ CREATE TABLE IF NOT EXISTS `tb_funcionario` (
   `senha` varchar(100) NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`idfuncionario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Extraindo dados da tabela `tb_funcionario`
@@ -316,8 +327,9 @@ CREATE TABLE IF NOT EXISTS `tb_funcionario` (
 
 INSERT INTO `tb_funcionario` (`idfuncionario`, `cpf`, `nome`, `id_cargo`, `sobrenome`, `email`, `senha`, `status`) VALUES
 (1, '22494676843', 'Vinicius', 1, 'Oliveira', 'vinicius@exemplo.com', '123456', 1),
-(8, 'teste', 'teste', 2, 'teste', 'teste@teste.com', 'teste', 1),
-(9, 'op', 'ope', 2, 'ope', 'paulovinicius_ti@outlook.com', 'ope', 1);
+(8, '14725836901472', 'teste', 2, 'teste', 'teste@teste.com', 'teste', 1),
+(9, 'op', 'ope', 2, 'ope', 'paulovinicius_ti@outlook.com', 'ope', 1),
+(10, 'test', 'test', 1, 'test54', 'teste@t32.com', 'test', 1);
 
 -- --------------------------------------------------------
 
@@ -334,7 +346,7 @@ CREATE TABLE IF NOT EXISTS `tb_funcionario_endereco` (
   `estado` char(2) NOT NULL,
   `id_funcionario` int(11) NOT NULL,
   PRIMARY KEY (`idenderecofunc`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Extraindo dados da tabela `tb_funcionario_endereco`
@@ -343,7 +355,8 @@ CREATE TABLE IF NOT EXISTS `tb_funcionario_endereco` (
 INSERT INTO `tb_funcionario_endereco` (`idenderecofunc`, `endereco`, `numero`, `cidade`, `bairro`, `estado`, `id_funcionario`) VALUES
 (1, 'Rua São paulo', '333', 'Arujá', 'Jd real', 'SP', 1),
 (2, 'teste', 'teste', 'teste', 'teste', 'SP', 8),
-(3, 'ope', 'ope', 'ope', 'ope', 'SP', 9);
+(3, 'ope', 'ope', 'ope', 'ope', 'SP', 9),
+(4, 'tet', 'test', 'test', 'test', 'SP', 10);
 
 -- --------------------------------------------------------
 
@@ -356,7 +369,7 @@ CREATE TABLE IF NOT EXISTS `tb_funcionario_telefone` (
   `id_funcionario` int(11) NOT NULL,
   `tel` int(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Extraindo dados da tabela `tb_funcionario_telefone`
@@ -365,7 +378,8 @@ CREATE TABLE IF NOT EXISTS `tb_funcionario_telefone` (
 INSERT INTO `tb_funcionario_telefone` (`id`, `id_funcionario`, `tel`) VALUES
 (1, 1, 46522937),
 (2, 8, 222),
-(3, 9, 0);
+(3, 9, 0),
+(4, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -375,21 +389,22 @@ INSERT INTO `tb_funcionario_telefone` (`id`, `id_funcionario`, `tel`) VALUES
 
 CREATE TABLE IF NOT EXISTS `tb_pedido` (
   `idpedido` int(11) NOT NULL AUTO_INCREMENT,
-  `cliente` varchar(200) NOT NULL,
+  `cliente` varchar(200) DEFAULT 'Não informado',
   `id_funcionario` int(11) NOT NULL,
   `status` char(1) NOT NULL,
-  `clienteCad` tinyint(1) NOT NULL,
+  `clienteCad` bit(1) NOT NULL,
   `total` decimal(10,0) NOT NULL,
   PRIMARY KEY (`idpedido`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
 
 --
 -- Extraindo dados da tabela `tb_pedido`
 --
 
 INSERT INTO `tb_pedido` (`idpedido`, `cliente`, `id_funcionario`, `status`, `clienteCad`, `total`) VALUES
-(1, 'Guilherme Alves', 1, 'F', 0, '0'),
-(2, 'João', 1, 'A', 1, '10');
+(30, 'Teste 1', 1, 'A', b'0', '50'),
+(31, 'Carina', 8, 'A', b'0', '30'),
+(32, 'ope ope', 8, 'C', b'1', '0');
 
 -- --------------------------------------------------------
 
@@ -401,20 +416,21 @@ CREATE TABLE IF NOT EXISTS `tb_produto` (
   `idproduto` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   `id_categoria` int(1) NOT NULL,
-  `qtd` int(11) NOT NULL,
+  `estoque` int(11) NOT NULL,
   `preco_unit` decimal(10,0) NOT NULL,
   `id_fornecedor` int(11) NOT NULL,
   `status` bit(1) NOT NULL,
   PRIMARY KEY (`idproduto`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Extraindo dados da tabela `tb_produto`
 --
 
-INSERT INTO `tb_produto` (`idproduto`, `nome`, `id_categoria`, `qtd`, `preco_unit`, `id_fornecedor`, `status`) VALUES
-(1, 'Cerveja G', 1, 20, '5', 1, b'1'),
-(2, 'Danoninho', 1, 2, '6', 2, b'0');
+INSERT INTO `tb_produto` (`idproduto`, `nome`, `id_categoria`, `estoque`, `preco_unit`, `id_fornecedor`, `status`) VALUES
+(1, 'Cerveja G', 1, 45, '10', 1, b'1'),
+(2, 'Danoninho', 1, 45, '6', 1, b'1'),
+(3, 'Leite saquinho', 1, 50, '5', 1, b'1');
 
 -- --------------------------------------------------------
 
@@ -427,16 +443,17 @@ CREATE TABLE IF NOT EXISTS `tb_produto_pedido` (
   `qtd` int(11) NOT NULL,
   `id_pedido` int(11) NOT NULL,
   `id_produto` int(11) NOT NULL,
-  `preco_total` decimal(11,0) NOT NULL,
+  `status` bit(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=46 ;
 
 --
 -- Extraindo dados da tabela `tb_produto_pedido`
 --
 
-INSERT INTO `tb_produto_pedido` (`id`, `qtd`, `id_pedido`, `id_produto`, `preco_total`) VALUES
-(1, 2, 2, 1, '10');
+INSERT INTO `tb_produto_pedido` (`id`, `qtd`, `id_pedido`, `id_produto`, `status`) VALUES
+(44, 5, 30, 1, b'1'),
+(45, 5, 31, 2, b'1');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

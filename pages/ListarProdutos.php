@@ -8,7 +8,7 @@
 				        <tr>
 				          	<th>Cod</th>
 				          	<th>Nome</th>
-				          	<th>Quantidade</th>
+				          	<th>estoque</th>
 				          	<th>Preço em R$</th>
 				          	<th>Ação</th>
 				        </tr>
@@ -16,7 +16,7 @@
 			  		<tbody>
 			  			<?php 
 			  				$produtos = MySql::conectar()->prepare("
-								SELECT idproduto, nome, qtd, preco_unit, status
+								SELECT idproduto, nome, estoque, preco_unit, status
 								FROM tb_produto
 								WHERE status != 0
 			  				");
@@ -28,7 +28,7 @@
 			    		<tr>
 				          	<th><?php echo $value['idproduto'];?></th>
 				          	<td><?php echo $value['nome']?></td>
-				          	<td><?php echo $value['qtd'];?></td>
+				          	<td><?php echo $value['estoque'];?></td>
 				          	<td><?php echo $value['preco_unit'];?></td>
 				          	<td>
 				          		<form method="post" style="display: inline-block;">

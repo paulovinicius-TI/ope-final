@@ -16,6 +16,9 @@ $(function(){
 			case 'produto':
 				formulario(form,INCLUDE_PATH+'ajax/CRUD_Produto.php','');
 				break;
+			case 'pedido':
+				formulario(form,INCLUDE_PATH+'ajax/CRUD_Pedido.php','');
+				break;
 			case 'fornecedor':
 				formulario(form,INCLUDE_PATH+'ajax/CRUD_Fornecedor.php','');
 				break;
@@ -71,6 +74,14 @@ function formulario(form,ajax,sit){
 					$('.formatar').each (function(){
   						this.reset();
 					});
+					break;
+				case 'adicionarProd':
+					if(data.situacao == 1) produto("Produto adicionado com sucesso!",'sucess');
+					//$("#pedido tbody").html("<?php echo 'ESTE';?>");
+					break;
+				case 'removerProd':
+					if(data.situacao == 1) situacao("Produto removido com sucesso!",'sucess');
+					//$("#pedido tbody").html("<?php echo 'ESTE';?>");
 					break;
 
 			}
@@ -296,4 +307,18 @@ function situacao(text,classe){
 
 function ativarCliente(){
 	$(".cadastro").css("display:none;");
+}
+
+function produto(text,classe){
+	var element = $('.nota');
+	element.removeClass();
+	element.addClass('nota');
+
+	element.fadeIn();
+	element.html(text);
+	element.addClass(classe);
+
+	setTimeout(function(){
+		element.fadeOut();
+	},3000)
 }

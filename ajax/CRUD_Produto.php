@@ -24,7 +24,7 @@
                 $data['id'] = $value['idproduto'];
                 $data['categoria'] = $value['id_categoria'];
                 $data['nome'] = $value['nome'];
-                $data['qtd'] = $value['qtd'];
+                $data['qtd'] = $value['estoque'];
                 $data['preco'] = $value['preco_unit'];
                 $data['fornecedor'] = $value['id_fornecedor'];
             }
@@ -41,7 +41,7 @@
                                 ON idfornecedor = P.id_fornecedor
                                 SET
                                     P.nome = ?,
-                                    P.qtd = ?,
+                                    P.estoque = ?,
                                     P.id_fornecedor = ?,
                                     P.preco_unit = ?,
                                     P.id_categoria = ?
@@ -91,7 +91,7 @@
             $id->execute();
             $id = $id->fetch();*/
             $func = MySql::conectar()->prepare("  
-                INSERT INTO tb_produto (nome,qtd,preco_unit,id_fornecedor,id_categoria, status) VALUES (?,?,?,?,?,1);
+                INSERT INTO tb_produto (nome,estoque,preco_unit,id_fornecedor,id_categoria, status) VALUES (?,?,?,?,?,1);
                 ");
             $func->execute(array(
                 trim($_POST['nome']),

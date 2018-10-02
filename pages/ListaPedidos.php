@@ -9,7 +9,7 @@
 				          	<th>Nº</th>
 				          	<th>Cliente</th>
 				          	<th>Atendente</th>
-				          	<th>Status</th>
+				          	<!--<th>Status</th>-->
 				          	<th>Total em R$</th>
 				          	<th>Ação</th>
 				        </tr>
@@ -17,11 +17,13 @@
 			      	<tbody>
 			  			<?php
 			  				$pedido = MySql::conectar()->prepare("
-			  					SELECT idpedido, cliente, nome, sobrenome, tb_pedido.status, total
-			  					FROM `tb_pedido` 
+			  					SELECT idpedido, cliente,clienteCad, nome, sobrenome, tb_pedido.status, total, PA.id_cliente
+			  					FROM `tb_pedido`
+			  					INNER JOIN tb_aux_pedido PA
+			  					ON PA.id_pedido = tb_pedido.idpedido
 			  					INNER JOIN `tb_funcionario`
 			  					ON id_funcionario = idfuncionario
-			  					WHERE tb_pedido.status != 'F'
+			  					WHERE tb_pedido.status != 'F' AND tb_pedido.status != 'C' AND tb_pedido.status != 'R'
 			  				");
 			  				$pedido->execute();
 			  				$pedido = $pedido->fetchAll();
@@ -32,7 +34,7 @@
 			          <th><?php echo $value['idpedido'];?></th>
 			          <td><?php echo $value['cliente'];?></td>
 			          <td><?php echo $value['nome'].' '.$value['sobrenome'];?></td>
-			          <td>
+			          <!--<td>
 			          	<?php if($value['status'] == 'E'){?>
 				            <button type="button" class="btn btn-success btn-xs">
 				            	<span>ENTREGUE</span>
@@ -48,18 +50,27 @@
 				              	<span>EM ANDAMENTO</span>
 				            </button>
 				        <?php }?>
-			          </td>
+			          </td>-->
 			          <td><?php echo $value['total'];?></td>
 			          <td>
-			            <button type="button" class="btn btn-warning btn-xs" title="Alterar" data-toggle="modal" data-target="#myModal">
-			              	<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+			          	<?php if($value['clienteCad'] == 1){ ?>
+			            <a href="<?php echo INCLUDE_PATH;?>UpdatePedido?pedido=<?php echo $value['idpedido'];?>&id=<?php echo $value['id_cliente'];?>"><button class="btn btn-warning btn-xs" title="Alterar" data-toggle="modal" data-target="#myModal" type="submit">
+			              		<strong>Vizualizar</strong>
 			            </button>
-			            <button type="button" class="btn btn-danger btn-xs" title="Remover">
+			            </a>
+			        <?php } else {?>
+				        
+			            <a href="<?php echo INCLUDE_PATH;?>Comanda?pedido=<?php echo $value['idpedido'];?>"><button class="btn btn-warning btn-xs" title="Alterar" data-toggle="modal" data-target="#myModal" type="submit">
+			              		<strong>Visualizar</strong>
+			            </button>
+			        	</a>
+			        <?php }?>
+			            <!--<button type="button" class="btn btn-danger btn-xs" title="Remover">
 			              	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 			            </button>
 			            <button type="button" class="btn btn-success btn-xs">
 			            	<span class="glyphicon glyphicon-usd"></span>
-			            </button>
+			            </button>-->
 			          </td>
 			        </tr>
 			        <?php endforeach;?>
