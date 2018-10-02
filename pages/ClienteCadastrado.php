@@ -284,25 +284,25 @@
 </div>
 
 <script type="text/javascript">
-  function cancelarPedido(idpedido,$produtos){
+  function cancelarPedido(idpedido,produtos){
     console.log(idpedido);
       $.ajax({
         url:'<?php echo INCLUDE_PATH;?>pages/DesistirPedido.php',
         method:'post',
         dataType: 'json',
-        data: {'idpedido':idpedido,'produtos':$produtos}
+        data: {'idpedido':idpedido,'produtos':produtos}
       }).done(function(data){
         alert("Pedido não gerado!");
         window.location.href = data.local;
       });
   }
 
-  function gerarPedido(idpedido){
+  function gerarPedido(idpedido,idcliente){
       $.ajax({
         url:'<?php echo INCLUDE_PATH;?>pages/pedido.php',
         method:'post',
         dataType: 'json',
-        data: {'idpedido':idpedido,'type':1}
+        data: {'idpedido':idpedido,'idcliente':idcliente,'type':1}
       }).done(function(data){
         alert("Pedido gerado com sucesso!");
         window.location.href = data.local;
