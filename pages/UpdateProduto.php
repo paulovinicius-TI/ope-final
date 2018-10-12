@@ -23,6 +23,11 @@
                               <div class="col-md-8 inputGroupContainer">
                               <input placeholder="Preço Unitário" name="preco" class="form-control" type="text" required></div>
                            </div>
+                           <div class="form-group">
+                              <label class="col-md-4 control-label">Aleta de Estoque</label>
+                              <div class="col-md-8 inputGroupContainer">
+                              <input placeholder="Alertar Estoque" name="alerta_estoque" class="form-control" type="text"></div>
+                           </div>
                         </td>
                         <tb>
                            <div class="form-group">

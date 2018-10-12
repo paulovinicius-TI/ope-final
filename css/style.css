@@ -110,3 +110,6 @@ body{
 	background-color: #f10303;
 	color: #fff;
 }
+.alerta-estoque{
+	color: red;
+}

@@ -11,12 +11,13 @@
 				          	<th>estoque</th>
 				          	<th>Preço em R$</th>
 				          	<th>Ação</th>
+
 				        </tr>
 			      	</thead>
 			  		<tbody>
 			  			<?php 
 			  				$produtos = MySql::conectar()->prepare("
-								SELECT idproduto, nome, estoque, preco_unit, status
+								SELECT idproduto, nome, estoque, preco_unit,alerta_estoque, status
 								FROM tb_produto
 								WHERE status != 0
 			  				");
@@ -30,6 +31,7 @@
 				          	<td><?php echo $value['nome']?></td>
 				          	<td><?php echo $value['estoque'];?></td>
 				          	<td><?php echo $value['preco_unit'];?></td>
+
 				          	<td>
 				          		<form method="post" style="display: inline-block;">
 				          			<input type="hidden" name="id" value="<?php echo $value['idproduto']; ?>"/>
@@ -51,6 +53,13 @@
 						            <button class="btn btn-danger btn-xs" title="Remover" type="submit" data-toggle="modal" data-target="#myModal" type="submit">
 						              	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 						            </button>
+		          	<?php 
+				          		if ($value['estoque'] <= $value['alerta_estoque']) {       		
+				          	  echo "<i class='alerta-estoque fas fa-exclamation-triangle' title='produto abaixo do estoque.'></i>";
+
+												
+											}
+				          	?>
 					            </form>
 			      			</td>
 			    		</tr>

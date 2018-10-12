@@ -26,6 +26,7 @@
                 $data['nome'] = $value['nome'];
                 $data['qtd'] = $value['estoque'];
                 $data['preco'] = $value['preco_unit'];
+                $data['alerta_estoque'] = $value['alerta_estoque'];
                 $data['fornecedor'] = $value['id_fornecedor'];
             }
             break;
@@ -44,6 +45,7 @@
                                     P.estoque = ?,
                                     P.id_fornecedor = ?,
                                     P.preco_unit = ?,
+                                    P.alerta_estoque = ?,
                                     P.id_categoria = ?
                                 WHERE idproduto = ?
                             ");
@@ -52,6 +54,7 @@
                 trim($_POST['qtd']),
                 +$_POST['fornecedor'],
                 trim($_POST['preco']),
+                trim($_POST['alerta_estoque']),
                 +$_POST['categoria'],
                 +$_POST['id']
             ));
@@ -91,12 +94,13 @@
             $id->execute();
             $id = $id->fetch();*/
             $func = MySql::conectar()->prepare("  
-                INSERT INTO tb_produto (nome,estoque,preco_unit,id_fornecedor,id_categoria, status) VALUES (?,?,?,?,?,1);
+                INSERT INTO tb_produto (nome,estoque,preco_unit,alerta_estoque,id_fornecedor,id_categoria, status) VALUES (?,?,?,?,?,?,1);
                 ");
             $func->execute(array(
                 trim($_POST['nome']),
                 trim($_POST['qtd']),
                 trim($_POST['preco']),
+                trim($_POST['alerta_estoque']),
                 +$_POST['fornecedor'],
                 +$_POST['categoria']
             ));
