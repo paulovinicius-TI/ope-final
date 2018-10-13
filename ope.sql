@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 12-Out-2018 às 05:26
+-- Generation Time: 14-Out-2018 às 01:49
 -- Versão do servidor: 10.1.35-MariaDB
 -- versão do PHP: 7.2.9
 
@@ -63,7 +63,8 @@ INSERT INTO `tb_aux_pedido` (`id`, `id_pedido`, `id_cliente`) VALUES
 (29, 31, 0),
 (30, 32, 3),
 (31, 33, 0),
-(32, 34, 1);
+(32, 34, 1),
+(33, 35, 1);
 
 -- --------------------------------------------------------
 
@@ -382,7 +383,7 @@ CREATE TABLE `tb_pedido` (
   `id_funcionario` int(11) NOT NULL,
   `status` char(1) NOT NULL,
   `clienteCad` bit(1) NOT NULL,
-  `total` decimal(10,0) NOT NULL
+  `total` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -390,11 +391,12 @@ CREATE TABLE `tb_pedido` (
 --
 
 INSERT INTO `tb_pedido` (`idpedido`, `cliente`, `id_funcionario`, `status`, `clienteCad`, `total`) VALUES
-(30, 'Teste 1', 1, 'A', b'0', '50'),
-(31, 'Carina', 8, 'A', b'0', '30'),
-(32, 'ope ope', 8, 'C', b'1', '0'),
-(33, 'Não informado', 1, 'A', b'0', '12'),
-(34, 'Vinicius Oliveira', 1, 'C', b'1', '0');
+(30, 'Teste 1', 1, 'R', b'0', '40.00'),
+(31, 'Carina', 8, 'A', b'0', '30.00'),
+(32, 'ope ope', 8, 'C', b'1', '0.00'),
+(33, 'Não informado', 1, 'A', b'0', '12.00'),
+(34, 'Vinicius Oliveira', 1, 'A', b'1', '36.00'),
+(35, 'Vinicius Oliveira', 1, 'C', b'1', '10.41');
 
 -- --------------------------------------------------------
 
@@ -407,7 +409,7 @@ CREATE TABLE `tb_produto` (
   `nome` varchar(255) NOT NULL,
   `id_categoria` int(1) NOT NULL,
   `estoque` int(11) NOT NULL,
-  `preco_unit` decimal(10,0) NOT NULL,
+  `preco_unit` decimal(10,2) NOT NULL,
   `id_fornecedor` int(11) NOT NULL,
   `status` bit(1) NOT NULL,
   `alerta_estoque` int(11) DEFAULT NULL
@@ -418,15 +420,15 @@ CREATE TABLE `tb_produto` (
 --
 
 INSERT INTO `tb_produto` (`idproduto`, `nome`, `id_categoria`, `estoque`, `preco_unit`, `id_fornecedor`, `status`, `alerta_estoque`) VALUES
-(1, 'Cerveja G', 1, 10, '10', 1, b'1', 0),
-(2, 'Danoninho', 1, 43, '6', 1, b'1', 10),
-(3, 'Leite saquinho', 1, 50, '5', 1, b'1', 456),
-(4, 'Produto meu', 1, 2000, '20', 0, b'0', 10),
-(5, 'rwewe', 1, 100, '10', 2, b'1', 10),
-(6, 'coca', 0, 10, '10', 0, b'0', 10),
-(7, 'Coca', 2, 10, '10', 1, b'1', 10),
-(8, 'Fanta Uva', 0, 30, '10', 1, b'0', 10),
-(9, 'Suco', 0, 20, '10', 1, b'1', 10);
+(1, 'Cerveja G', 1, 14, '10.41', 1, b'1', 0),
+(2, 'Danoninho', 1, 39, '6.00', 1, b'1', 10),
+(3, 'Leite saquinho', 1, 38, '1.00', 1, b'1', 456),
+(4, 'Produto meu', 1, 2000, '20.00', 0, b'0', 10),
+(5, 'rwewe', 1, 100, '10.00', 2, b'1', 10),
+(6, 'coca', 0, 10, '10.00', 0, b'0', 10),
+(7, 'Coca', 2, 10, '10.00', 1, b'1', 10),
+(8, 'Fanta Uva', 0, 30, '10.00', 1, b'0', 10),
+(9, 'Suco', 0, 20, '10.00', 1, b'1', 10);
 
 -- --------------------------------------------------------
 
@@ -447,9 +449,13 @@ CREATE TABLE `tb_produto_pedido` (
 --
 
 INSERT INTO `tb_produto_pedido` (`id`, `qtd`, `id_pedido`, `id_produto`, `status`) VALUES
-(44, 5, 30, 1, b'1'),
+(44, 0, 30, 1, b'0'),
 (45, 5, 31, 2, b'1'),
-(46, 2, 33, 2, b'1');
+(46, 2, 33, 2, b'1'),
+(47, 0, 34, 1, b'0'),
+(48, 4, 34, 2, b'1'),
+(49, 12, 34, 3, b'1'),
+(50, 1, 35, 1, b'1');
 
 --
 -- Indexes for dumped tables
@@ -577,7 +583,7 @@ ALTER TABLE `lista`
 -- AUTO_INCREMENT for table `tb_aux_pedido`
 --
 ALTER TABLE `tb_aux_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tb_cargo`
@@ -661,7 +667,7 @@ ALTER TABLE `tb_funcionario_telefone`
 -- AUTO_INCREMENT for table `tb_pedido`
 --
 ALTER TABLE `tb_pedido`
-  MODIFY `idpedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `idpedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `tb_produto`
@@ -673,7 +679,7 @@ ALTER TABLE `tb_produto`
 -- AUTO_INCREMENT for table `tb_produto_pedido`
 --
 ALTER TABLE `tb_produto_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
