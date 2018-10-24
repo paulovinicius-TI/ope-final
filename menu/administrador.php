@@ -31,9 +31,9 @@
 
 	<li><a realtime="ListaFornecedor" href="<?php echo INCLUDE_PATH;?>ListaFornecedor">Listar Fornecedor</a></li>
 
-	<!--<li><a realtime="ControleLucro" href="<?php echo INCLUDE_PATH;?>ControleLucro">Controle de Lucro</a></li>
+	<li><a realtime="ControleLucro" href="<?php echo INCLUDE_PATH;?>ControleLucro">Controle de Lucro</a></li>
 
-	<li><a href="#">Controle de Estoque</a></li>-->
+	<!--<li><a href="#">Controle de Estoque</a></li>-->
 </ul>
 </div>
 <div class="item">
