@@ -22,66 +22,38 @@
 					          	<th>Dezembro</th>
 					        </tr>
 				      	</thead>
-				      	<tbody>
+				      	<?php for ($i=0; $i < 10; $i++) { 
+				      	echo '<tbody class="teste">
 				        <tr>
-				          <th>Saldo Inicial</th>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				        </tr>
+				        	<th>Saldo Inicial</th>';
+				      	for ($x = 0; $x <= 11; $x++) {
+				          echo '<td><input type="number" name="SI'.$i.''.$x.'"></td>';
+				        }  
+
+				        echo '</tr>
+
 				        <tr>
-				          <th>Receitas</th>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				        </tr>
+				        	<th>Receitas</th>';
+				      	for ($x = 0; $x <= 11; $x++) {
+				          echo '<td><input type="number" name="Re'.$i.''.$x.'"></td>';
+				        }
+				        
+				        echo '</tr>
+
 				        <tr>
-				          <th>Despezas</th>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				        </tr>
+				        	<th>Despezas</th>';
+				      	for ($x = 0; $x <= 11; $x++) {
+				          echo '<td><input type="number" name="De'.$i.''.$x.'"></td>';
+				        }
+				        echo '</tr>
+
 				        <tr>
-				          <th>Lucro/Prejuízo</th>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
-				          <td><input type="number" name=""></td>
+				        	<th>Lucro/Preju</th>';
+				      	for ($x = 0; $x <= 11; $x++) {
+				          echo '<td><input type="number" name="LP'.$i.''.$x.'"></td>';
+				        };
+				      }?>
+				        
 				        </tr>
 				       	<tr class="nenhum-registro">
 							<td colspan="6" style="text-align: center;">Nenhum Mês ou Ano encontrado...</td>
