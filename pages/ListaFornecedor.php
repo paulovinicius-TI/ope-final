@@ -55,7 +55,7 @@
 			    		</tr>
 			    		<?php endforeach;?>
 				       	<tr class="nenhum-registro">
-							<td colspan="6" style="text-align: center;">Nenhum funcionário encontrado...</td>
+							<td colspan="6" style="text-align: center;">Nenhum fornecedor encontrado...</td>
 						</tr>
 			  		</tbody>
 				</table>

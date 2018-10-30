@@ -2,7 +2,7 @@
     include('../config.php');
 
     $data = array();
-    //$id = +$_POST['id'];
+    $id = +$_POST['id'];
     $acao = $_POST['acao'];
 
     switch ($acao){
@@ -28,7 +28,6 @@
                 $data['nome'] = $value['nome'];
                 $data['sobrenome'] = $value['sobrenome'];
                 $data['email'] = $value['email'];
-                $data['senha'] = $value['senha'];
                 $data['cargo'] = $value['idcargo'];
                 $data['tel'] = $value['tel'];
                 $data['endereco'] = $value['endereco'];
@@ -133,6 +132,23 @@
             ));
             $data['situacao'] = 1;
             break;
+            
+        case 'alterarS':
+            $data['formulario'] = 'read';
+            $data['TESTE'] = 'TESTE';
+            $data['situacao'] = 1;
+            $id = +$_POST['idfuncionario'];
+            $password= $_POST['password'];
+
+            $func = MySql::conectar()->prepare("  
+                UPDATE `tb_funcionario` SET `senha` = ? WHERE senha = '$password'
+                ");
+            $func->execute(array(
+                $_POST['senha']
+            ));
+            $data['situacao'] = 1;
+            break;
+        
 
     }
 

@@ -1,7 +1,6 @@
 <div class="item">
 <h2>Pedido</h2>
 <ul>
-	<li>NÃO ESTÁ PRONTO</li>
 	<!-- <li><a href="#">Novo Pedido</a></li> -->
 	<li><a realtime="ListaPedidos" href="<?php echo INCLUDE_PATH;?>ListaPedidos">Listar Pedido</a></li>
 	<!-- <li><a href="#">Finalizar Pedido</a></li> -->
@@ -29,7 +28,6 @@
 <h2>Configuração</h2>
 <ul>
 	<li><a realtime="alterar senha" href="<?php echo INCLUDE_PATH;?>Alterarsenha">Alterar senha</a></li>
-	<li>NÃO ESTÁ PRONTO</li>
 	<!--<li><a href="#">Editar</a></li>-->
 </ul>
 </div>

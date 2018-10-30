@@ -84,6 +84,7 @@ function formulario(form,ajax,sit){
 					//$("#pedido tbody").html("<?php echo 'ESTE';?>");
 					break;
 
+
 			}
 				
 		});
@@ -145,6 +146,7 @@ function pessoal(data){
 					$('.modal-body').load(INCLUDE_PATH+'forms/funcionario.php');
 					pessoalExeculte(data.acao,data);
 					break;*/
+
 
 			}
 }
