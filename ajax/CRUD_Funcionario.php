@@ -134,10 +134,9 @@
             break;
             
         case 'alterarS':
-            $data['formulario'] = 'read';
+            $data['formulario'] = 'update';
             $data['TESTE'] = 'TESTE';
             $data['situacao'] = 1;
-            $id = +$_POST['idfuncionario'];
             $password= $_POST['password'];
 
             $func = MySql::conectar()->prepare("  
