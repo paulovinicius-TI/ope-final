@@ -77,7 +77,7 @@
 		ativaBuscaPaginacao('#list-thumbs',
 		    {
 				elPaginacao: '#paginacao', 
-				itensPorPag: 3, 
+				itensPorPag: 5, 
 				elInput: '#pesquisaSlide'
 			}
 		);

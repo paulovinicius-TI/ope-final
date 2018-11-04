@@ -1,6 +1,30 @@
-<input id="pesquisaSlide" class="form-control left" placeholder="Pesquisar Funcionário" />
-<a href="<?php echo INCLUDE_PATH;?>CadastroCliente"><button type="button" class="btn btn-info right">+ Novo</button></a>
-<div class="clear"></div>
+<?php 
+	$sql = MySql::conectar()->prepare("
+	SELECT *
+	FROM tb_cliente C
+	WHERE C.status != 0
+	");
+	$sql->execute();
+	$qtd = $sql->rowCount();
+?>
+<div style="width: 100%;">
+	<div class="left" style="width: 50%;float: left;">
+		<input id="pesquisaSlide" class="form-control left" placeholder="Pesquisar Cliente" />
+		<a href="<?php echo INCLUDE_PATH;?>CadastroCliente"><button type="button" class="btn btn-info right">+ Novo</button></a>
+	</div>
+	<div class="right" style="width: 15%;float: right">
+		<label for="sel1">Resultados por página:</label> 
+		<select class="form-control" id="sel1" onchange="pagination(this,'#list-thumbs','#pesquisaSlide')">
+			
+				<option value="5">5</option>
+				<?php if($qtd > 5):?>
+					<option value="10">10</option>
+				<?php endif;?>
+		
+		</select>
+	</div>
+	<div class="clear"></div>
+</div>
 <h1 class="page-header">Lista de Clientes</h1>
 				<div class="table-responsive">
 				    <table class="table table-striped table-bordered table-hover" id="list-thumbs">

@@ -64,3 +64,14 @@ function ativaBuscaPaginacao(lista, o) {
         paginarTudo();
     }
 }
+
+
+function pagination(qtd,tabela,pesquisa){
+    ativaBuscaPaginacao(tabela,
+        {
+            elPaginacao: '#paginacao', 
+            itensPorPag: +qtd.value, 
+            elInput: pesquisa
+        }
+    );
+}
