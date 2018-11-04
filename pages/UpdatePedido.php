@@ -128,8 +128,8 @@
    </table>
    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"  >+ Produto</button>
    <?php if($total != 0):?>
-     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalCancelarPed"  >Cancelar Pedido</button>
-     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"  disabled>Fechar compra</button>
+     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalCancelarPed"   >Cancelar Pedido</button>
+     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#fecharCompra">Fechar compra</button>
     <?php endif;?>
    <p class="right">Total: R$ <?php echo $total;?></p>
 </div>
@@ -217,6 +217,29 @@
 
 
 
+<div class="modal fade" id="fecharCompra" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content"><h1>Nº 
+      <?php echo $_GET['pedido'];?></h1>
+      <div class="modal-header">
+      </div>
+      <div class="modal-body">
+        <select name="formaPagemento" id="formaPagemento">
+          <option value="0">Dinheiro</option>
+          <option value="1">Cartão</option>
+        </select><br/><br/>
+        Total: 
+        R$ <?php echo $total;?>
+
+        <p>Tem Certeza que deseja finalizar este pedido?</p>
+        <button type="button" class="btn btn-success" onClick='FinalizarPedido(<?php echo($_GET['pedido'].','.$total);?>)'>Sim</button>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#fecharCompra">Não</button>
+      </div>
+    </div>
+  </div>  
+</div>
+
 <div class="modal fade" id="ModalCancelarPed" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -244,5 +267,22 @@
         alert("Pedido cancelado com sucesso!");
         window.location.href = data.local;
       });
+  }
+
+  function FinalizarPedido(pedido,total){
+      var pagamento = $('#formaPagemento').val();
+     $.ajax({
+        url:'<?php echo INCLUDE_PATH;?>pages/FinalizarPed.php',
+        method:'post',
+        dataType: 'json',
+        data: {'idpedido':pedido,'total':total,'pagamento':pagamento}
+      }).done(function(data){
+        alert("Pedido finalizado com sucesso!");
+        window.location.href = data.local;
+      });
+  }
+
+  function totalPedido(){
+     $('.modal-body').load(INCLUDE_PATH+'pages/UpdateFornecedor.php');
   }
 </script>

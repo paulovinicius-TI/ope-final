@@ -5,8 +5,6 @@
       <tr>
          <td>
             <?php 
-              date_default_timezone_set('America/Sao_Paulo');
-              $date = date('Y-m-d');
               $func = MySql::conectar()->prepare("
                   SELECT nome,cliente
                   FROM tb_funcionario
@@ -116,9 +114,9 @@
    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"  >+ Produto</button>
    <?php if($total != 0):?>
      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalCancelarPed"  >Cancelar Pedido</button>
-     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" disabled >Fechar compra</button>
+     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#fecharCompra" >Fechar compra</button>
     <?php endif;?>
-   <p class="right">Total: R$ <?php echo $total;?></p>
+   <p class="right">Total: R$ <span class="total"><?php echo $total;?></span></p>
 </div>
 <div class="clear"></div>
       </div>
@@ -204,6 +202,30 @@
 
 
 
+
+<div class="modal fade" id="fecharCompra" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content"><h1>Nº 
+      <?php echo $_GET['pedido'];?></h1>
+      <div class="modal-header">
+      </div>
+      <div class="modal-body">
+        <select name="formaPagemento" id="formaPagemento">
+          <option value="0">Dinheiro</option>
+          <option value="1">Cartão</option>
+        </select><br/><br/>
+        Total: 
+        R$ <span class="total"><?php echo $total;?></span>
+
+        <p>Tem Certeza que deseja finalizar este pedido?</p>
+        <button type="button" class="btn btn-success" data-toggle="modal" nli-target="#ModalCancelarPed" onClick='FinalizarPedido(<?php echo($_GET['pedido'].','.$total);?>)'>Sim</button>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalCancelarPed">Não</button>
+      </div>
+    </div>
+  </div>  
+</div>
+
 <div class="modal fade" id="ModalCancelarPed" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -229,6 +251,19 @@
         data: {'idpedido':idpedido,'produtos':$produtos}
       }).done(function(data){
         alert("Pedido cancelado com sucesso!");
+        window.location.href = data.local;
+      });
+  }
+
+  function FinalizarPedido(pedido,total){
+      var pagamento = $('#formaPagemento').val();
+     $.ajax({
+        url:'<?php echo INCLUDE_PATH;?>pages/FinalizarPed.php',
+        method:'post',
+        dataType: 'json',
+        data: {'idpedido':pedido,'total':total,'pagamento':pagamento}
+      }).done(function(data){
+        alert("Pedido finalizado com sucesso!");
         window.location.href = data.local;
       });
   }
