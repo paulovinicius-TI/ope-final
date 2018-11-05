@@ -57,8 +57,8 @@
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/constantes.js"></script>
 	<script src="js/teste.js"></script>
-	<script src="js/form.js"></script>
 	<script src="js/scriptGeral.js"></script>
+	<script src="js/form.js"></script>
    	<!--<script type="text/javascript">
         $(function(){
             carregarDinamico();

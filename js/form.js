@@ -324,3 +324,18 @@ function produto(text,classe){
 		element.fadeOut();
 	},3000)
 }
+
+function filtro(filtrar){
+	if(filtrar.value == "todos") $('.table-responsive').load(INCLUDE_PATH+'pages/FiltrarTodosProdutos.php');
+	else $('.table-responsive').load(INCLUDE_PATH+'pages/FiltrarEstoqueBaixo.php');
+	var x = 0;
+	var intervalo = setInterval(function(){
+		var qtd = [];
+		qtd['value'] = 5;
+		pagination(qtd,'#list-thumbs','#pesquisaSlide')
+		x++;
+		if(x == 2) clearInterval(intervalo);
+	},100);
+	
+}
+		
