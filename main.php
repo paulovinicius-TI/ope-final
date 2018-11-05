@@ -16,7 +16,7 @@
 </head>
 <body>
 	<base base="<?php echo INCLUDE_PATH;?>" />
-	<?php $url = isset($_GET['url']) ? $_GET['url'] : 'ListaClientes';?>
+	<?php $url = isset($_GET['url']) ? $_GET['url'] : 'CadastroPedido';?>
 
 	<div class="menu scrollbar" id="style-2">
       	<div class="force-overflow"></div>
@@ -51,7 +51,7 @@
 		        <?php
 		           if(file_exists('pages/'.$url.'.php')){
 		            	include('pages/'.$url.'.php');
-		            }else include('pages/ListaCliente.php');
+		            }else include('pages/CadastroPedido.php');
 		        ?>
 
 	<script src="js/jquery-3.3.1.min.js"></script>

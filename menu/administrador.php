@@ -39,6 +39,5 @@
 <h2>Configuração</h2>
 <ul>
     <li><a realtime="Alterarsenha" href="<?php echo INCLUDE_PATH;?>Alterarsenha">Alterar senha</a></li>
-	<li><a href="<?php echo INCLUDE_PATH;?>Caixa">Caixa</a></li>
 </ul>
 </div>
