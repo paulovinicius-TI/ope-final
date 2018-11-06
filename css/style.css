@@ -117,3 +117,16 @@ body{
 .teste input{
     width: 62px;
 }
+
+.alterarSenha{
+	/*box-shadow: 10px 10px 5px rgb(200,200,200); */
+    max-width: 600px;
+    width: 95%;
+    padding: 60px 2%;
+    background-color: #fff;
+    /* position: absolute; */
+    left: 50%;
+    top: 50%;
+    /* transform: translate(-50%,-50%); */
+    /*ms-transform: translate(-50%,-50%);*/
+}

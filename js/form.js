@@ -83,6 +83,14 @@ function formulario(form,ajax,sit){
 					if(data.situacao == 1) situacao("Produto removido com sucesso!",'sucess');
 					//$("#pedido tbody").html("<?php echo 'ESTE';?>");
 					break;
+				case 'senha':
+					$(".salvar").removeAttr("disabled");
+					$(".btn-primary").html("Salvar");
+					if(data.situacao == 1) situacao("Senha Salva com sucesso!",'sucess');
+					else situacao("Senha invalida!",'error');
+					$('.modal').modal('hide');
+					break;
+				
 
 
 			}
@@ -274,6 +282,7 @@ function pessoalExeculte(tipo,data){
 				$(".formatar input[name='nome']").val(data['nome']);
 				$(".formatar input[name='qtd']").val(data['qtd']);
 				$(".formatar input[name='preco']").val(data['preco']);
+				$(".formatar input[name='alerta_estoque']").val(data['alerta_estoque']);
 				$(".formatar .categoria option[value="+data['categoria']+"]").attr("selected",'');
 				$(".formatar .fornecedor > option[value="+data['categoria']+"]").attr("selected",'');
 				x++;

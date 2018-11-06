@@ -31,7 +31,6 @@
                            <div class="form-group">
                               <label for="sel1">Categoria</label>
                               <select class="form-control" id="sel1" name="categoria">
-                                <option value="0">Não informado</option>
                                 <?php 
                                     $forn = MySql::conectar()->prepare("
                                         SELECT * FROM tb_categoria WHERE status != 0"
@@ -55,7 +54,6 @@
                            <div class="form-group">
                               <label for="sel1">Fornecedor</label>
                               <select class="form-control" id="sel1" name="fornecedor">
-                                <option value="0">Não informado</option>
                                 <?php 
                                     $cat = MySql::conectar()->prepare("
                                         SELECT * FROM tb_fornecedor"

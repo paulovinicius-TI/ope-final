@@ -134,18 +134,24 @@
             break;
             
         case 'alterarS':
-            $data['formulario'] = 'update';
+            $data['formulario'] = 'senha';
             $data['TESTE'] = 'TESTE';
-            $data['situacao'] = 1;
             $password= $_POST['password'];
+            $senha = $_POST['senha'];
 
             $func = MySql::conectar()->prepare("  
                 UPDATE `tb_funcionario` SET `senha` = ? WHERE senha = '$password'
                 ");
-            $func->execute(array(
-                $_POST['senha']
-            ));
-            $data['situacao'] = 1;
+
+            if ($password ==$_SESSION['password']) {
+                $data['situacao'] = 1;
+                $func->execute(array(
+                    $_POST['senha']
+                ));
+            } else {
+                $data['situacao'] = 2;
+            }
+            
             break;
         
 

@@ -1,4 +1,4 @@
-<div class="box-login">
+<div class="alterarSenha">
 	<h2>Alterar senha </h2>
 	<form method="post" class="formatar">
         <input type="hidden" name="id" value="" required>
@@ -8,4 +8,6 @@
 		<input type="password" name="senha" placeholder="Nova senha" />
 		<input type="submit"  class="salvar" name="acao"/>
 	</form>
+</div>
+</div>
 </div>
