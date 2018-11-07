@@ -11,7 +11,7 @@
         FROM tb_funcionario F
         INNER JOIN tb_cargo C
         ON F.id_cargo = C.idcargo
-        WHERE email = ? AND senha = ?");
+        WHERE email = ? AND senha = ? AND status = 1");
 
     $sql->execute(array($user,$password));
 
