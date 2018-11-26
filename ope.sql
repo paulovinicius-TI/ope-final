@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 04-Nov-2018 às 16:44
+-- Generation Time: 26-Nov-2018 às 12:43
 -- Versão do servidor: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -322,7 +322,7 @@ CREATE TABLE IF NOT EXISTS `tb_funcionario` (
   `senha` varchar(100) NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`idfuncionario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Extraindo dados da tabela `tb_funcionario`
@@ -332,7 +332,8 @@ INSERT INTO `tb_funcionario` (`idfuncionario`, `cpf`, `nome`, `id_cargo`, `sobre
 (1, '000.000.000-00', 'Vinicius', 1, 'Oliveira', 'vinicius@exemplo.com', '123456', 1),
 (8, '14725836901472', 'teste', 2, 'teste', 'teste@teste.com', 'teste', 1),
 (9, 'op', 'ope', 2, 'ope', 'paulovinicius_ti@outlook.com', 'ope', 1),
-(10, 'test', 'test', 1, 'test54', 'teste@t32.com', 'test', 1);
+(10, 'test', 'test', 1, 'test54', 'teste@t32.com', 'test', 1),
+(11, '333.333.333-33', 'paulo', 1, 'teste', 'paulo@teste.com', '321654', 1);
 
 -- --------------------------------------------------------
 
@@ -349,7 +350,7 @@ CREATE TABLE IF NOT EXISTS `tb_funcionario_endereco` (
   `estado` char(2) NOT NULL,
   `id_funcionario` int(11) NOT NULL,
   PRIMARY KEY (`idenderecofunc`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Extraindo dados da tabela `tb_funcionario_endereco`
@@ -359,7 +360,8 @@ INSERT INTO `tb_funcionario_endereco` (`idenderecofunc`, `endereco`, `numero`, `
 (1, 'Rua São paulo', '333', 'Arujá', 'Jd real', 'SP', 1),
 (2, 'teste', 'teste', 'teste', 'teste', 'SP', 8),
 (3, 'ope', 'ope', 'ope', 'ope', 'SP', 9),
-(4, 'tet', 'test', 'test', 'test', 'SP', 10);
+(4, 'tet', 'test', 'test', 'test', 'SP', 10),
+(5, 'paulo teste', '987A', 'paulo', 'paulo', 'SP', 11);
 
 -- --------------------------------------------------------
 
@@ -370,19 +372,20 @@ INSERT INTO `tb_funcionario_endereco` (`idenderecofunc`, `endereco`, `numero`, `
 CREATE TABLE IF NOT EXISTS `tb_funcionario_telefone` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_funcionario` int(11) NOT NULL,
-  `tel` int(20) NOT NULL,
+  `tel` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Extraindo dados da tabela `tb_funcionario_telefone`
 --
 
 INSERT INTO `tb_funcionario_telefone` (`id`, `id_funcionario`, `tel`) VALUES
-(1, 1, 46522937),
-(2, 8, 222),
-(3, 9, 0),
-(4, 10, 0);
+(1, 1, '46522937'),
+(2, 8, '222'),
+(3, 9, '0'),
+(4, 10, '0'),
+(5, 11, '44-44444-4444');
 
 -- --------------------------------------------------------
 
