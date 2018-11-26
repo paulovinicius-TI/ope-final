@@ -2,7 +2,7 @@
     include('../config.php');
 
     $data = array();
-    $id = +$_POST['id'];
+    //$id = +$_POST['id'];
     $acao = $_POST['acao'];
 
     switch ($acao){
