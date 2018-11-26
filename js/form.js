@@ -286,7 +286,7 @@ function pessoalExeculte(tipo,data){
 				$(".formatar input[name='preco']").val(data['preco']);
 				$(".formatar input[name='alerta_estoque']").val(data['alerta_estoque']);
 				$(".formatar .categoria option[value="+data['categoria']+"]").attr("selected",'');
-				$(".formatar .fornecedor > option[value="+data['categoria']+"]").attr("selected",'');
+				$(".formatar .fornecedor > option[value="+data['fornecedor']+"]").attr("selected",'');
 				x++;
 				if(x == 2) clearInterval(intervalo);
 			},100);
