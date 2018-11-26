@@ -79,7 +79,7 @@
                            <div class="form-group">
                               <label class="col-md-4 control-label">Senha</label>
                               <div class="col-md-8 inputGroupContainer">
-                              <input placeholder="senha" name="senha" class="form-control" type="text"></div>
+                              <input placeholder="senha" name="senha" class="form-control" type="password"></div>
                            </div>
                         <td>
                      </tr>
