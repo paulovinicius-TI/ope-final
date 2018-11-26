@@ -56,7 +56,8 @@
                               <select class="form-control" id="sel1" name="fornecedor">
                                 <?php 
                                     $cat = MySql::conectar()->prepare("
-                                        SELECT * FROM tb_fornecedor"
+                                        SELECT * FROM tb_fornecedor
+                                        WHERE status = 1"
                                     );
 
                                     $cat->execute();
