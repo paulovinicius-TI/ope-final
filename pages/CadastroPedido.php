@@ -121,6 +121,7 @@
    </table>
 </div>
 
+<div class="carregar">
 <div class="w100 left" style="margin-top: 50px;">
    <table class="table" id="pedido">
      <thead class="thead-dark">
@@ -170,6 +171,8 @@
                       <input type="hidden" name="acao" value="remover">
                       <input type="hidden" name="formulario" value="pedido">
 
+                      <input type="hidden" name="gerado" value="0">
+
                       <button class="btn btn-xs" title="Remover" type="submit">
                           x
                       </button>
@@ -190,6 +193,7 @@
    <p class="right">Total: R$ <?php echo $total;?></p>
 </div>
 <div class="clear"></div>
+        </div>
       </div>
   </div>
 </div>
@@ -245,6 +249,7 @@
 
                         <input type="hidden" name="acao" value="adicionar">
                         <input type="hidden" name="formulario" value="pedido">
+                        <input type="hidden" name="gerado" value="0">
 
                         <button class="btn btn-xs" title="Adicionar" type="submit">
                             <span class="glyphicon glyphicon-plus"></span>

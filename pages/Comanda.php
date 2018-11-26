@@ -47,78 +47,80 @@
    </tbody>
    </table>
 </div>
-<div class="w100 left" style="margin-top: 50px;">
-   <table class="table" id="pedido">
-     <thead class="thead-dark">
-       <tr>
-         <th scope="col">Cod</th>
-         <th scope="col">Produto</th>
-         <th scope="col">Quantidade</th>
-         <th scope="col">Valor Unit.</th>
-       </tr>
-     </thead>
-     <tbody>
-      <?php 
-         $produto = MySql::conectar()->prepare("
-              SELECT *
-              FROM tb_produto_pedido PED
-              INNER JOIN tb_produto PROD
-              ON PROD.idproduto = PED.id_produto
-              WHERE id_pedido = ? AND PED.status != 0"
-          );
-          $produto->execute(array(+$_GET['pedido']));
+<div class="carregar">
+          <div class="w100 left" style="margin-top: 50px;">
+            <table class="table" id="pedido">
+              <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Cod</th>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Valor Unit.</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <?php 
+                   $produto = MySql::conectar()->prepare("
+                        SELECT *
+                        FROM tb_produto_pedido PED
+                        INNER JOIN tb_produto PROD
+                        ON PROD.idproduto = PED.id_produto
+                        WHERE id_pedido = ? AND PED.status != 0"
+                    );
+                    $produto->execute(array(+$_GET['pedido']));
 
-          $sql = MySql::conectar()->prepare("
-            UPDATE tb_pedido P
-            SET total = ?
-            WHERE idpedido = ?
-          ");
+                    $sql = MySql::conectar()->prepare("
+                      UPDATE tb_pedido P
+                      SET total = ?
+                      WHERE idpedido = ?
+                    ");
 
-          $total = 0;
-          $data = array();
+                    $total = 0;
+                    $data = array();
 
-          $produto = $produto->fetchAll();
-          foreach ($produto as $key => $value):
-            $total += $value['qtd'] * $value['preco_unit'];
-            $data[$value['idproduto']] = $value['qtd'];
-        ?>
-        <tr>
-         <th scope="row"><?php echo $value['idproduto']?></th>
-         <td><?php echo $value['nome']?>
-           <form method="post" style="display: inline-block;">
-         </td>
-         <td><?php echo $value['qtd']?>
-              <input type="hidden" name="qtd" value=<?php echo $value['qtd'];?>>
-         </td>
-         <td><?php echo $value['preco_unit']?></td>
-                  <td>
-                    
-                      <input type="hidden" name="idproduto" value="<?php echo $value['idproduto']; ?>"/>
-                      <input type="hidden" name="idpedido" value="<?php echo $_GET['pedido']; ?>"/>
+                    $produto = $produto->fetchAll();
+                    foreach ($produto as $key => $value):
+                      $total += $value['qtd'] * $value['preco_unit'];
+                      $data[$value['idproduto']] = $value['qtd'];
+                  ?>
+                  <tr>
+                    <th scope="row"><?php echo $value['idproduto']?></th>
+                    <td><?php echo $value['nome']?>
+                      
+                    </td>
+                    <td><?php echo $value['qtd']?></td>
+                    <td><?php echo $value['preco_unit']?></td>
+                    <td>
+                      <form method="post" style="display: inline-block;">
+                        <input type="hidden" name="qtd" value=<?php echo $value['qtd'];?>>
+                        <input type="hidden" name="idproduto" value="<?php echo $value['idproduto']; ?>"/>
+                        <input type="hidden" name="idpedido" value="<?php echo $_GET['pedido']; ?>"/>
 
-                      <input type="hidden" name="acao" value="remover">
-                      <input type="hidden" name="formulario" value="pedido">
+                        <input type="hidden" name="acao" value="remover">
+                        <input type="hidden" name="formulario" value="pedido">
+                        <input type="hidden" name="gerado" value="1">
 
-                      <button class="btn btn-xs" title="Remover" type="submit">
-                          x
-                      </button>
-                  </form>
-                </td>
-       </tr>
-     <?php endforeach;
-     $json_php = json_encode($data);
-    $sql->execute(array($total, +$_GET['pedido']));
-    ?>
-     </tbody>
-   </table>
-   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"  >+ Produto</button>
-   <?php if($total != 0):?>
-     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalCancelarPed"  >Cancelar Pedido</button>
-     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#fecharCompra" >Fechar compra</button>
-    <?php endif;?>
-   <p class="right">Total: R$ <span class="total"><?php echo $total;?></span></p>
-</div>
-<div class="clear"></div>
+                        <button class="btn btn-xs" title="Remover" type="submit">
+                           x
+                        </button>
+                      </form>
+                    </td>
+                 </tr>
+                  <?php endforeach;
+                    $json_php = json_encode($data);
+                    $sql->execute(array($total, +$_GET['pedido']));
+                  ?>
+                </tbody>
+             </table>
+             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"  >+ Produto</button>
+             <?php if($total != 0):?>
+               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalCancelarPed"  >Cancelar Pedido</button>
+               <button type="button" class="btn btn-success" data-toggle="modal" data-target="#fecharCompra" onclick="FinalizarCompra()">Fechar compra</button>
+              <?php endif;?>
+             <p class="right">Total: R$ <span class="total"><?php echo $total;?></span></p>
+          </div>
+          <div class="clear"></div>
+        </div>
       </div>
   </div>
 </div>
@@ -174,6 +176,7 @@
 
                         <input type="hidden" name="acao" value="adicionar">
                         <input type="hidden" name="formulario" value="pedido">
+                        <input type="hidden" name="gerado" value="1">
 
                         <button class="btn btn-xs" title="Adicionar" type="submit">
                             <span class="glyphicon glyphicon-plus"></span>
@@ -216,10 +219,10 @@
           <option value="1">Cartão</option>
         </select><br/><br/>
         Total: 
-        R$ <span class="total"><?php echo $total;?></span>
+        R$ <span class="totalPagar"><?php echo $total;?></span>
 
         <p>Tem Certeza que deseja finalizar este pedido?</p>
-        <button type="button" class="btn btn-success" data-toggle="modal" nli-target="#ModalCancelarPed" onClick='FinalizarPedido(<?php echo($_GET['pedido'].','.$total);?>)'>Sim</button>
+        <button type="button" class="btn btn-success" data-toggle="modal" nli-target="#ModalCancelarPed" onClick='FinalizarPedido(<?php echo($_GET['pedido']);?>)'>Sim</button>
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalCancelarPed">Não</button>
       </div>
     </div>
@@ -255,8 +258,9 @@
       });
   }
 
-  function FinalizarPedido(pedido,total){
-      var pagamento = $('#formaPagemento').val();
+  function FinalizarPedido(pedido){
+     var pagamento = $('#formaPagemento').val();
+     var total = $('.total').html();
      $.ajax({
         url:'<?php echo INCLUDE_PATH;?>pages/FinalizarPed.php',
         method:'post',
@@ -267,4 +271,10 @@
         window.location.href = data.local;
       });
   }
+
+function FinalizarCompra(){
+  var total = $('.total').html();
+  $('.totalPagar').html(total);
+}
+
 </script>

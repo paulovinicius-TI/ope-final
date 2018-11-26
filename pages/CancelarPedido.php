@@ -1,7 +1,24 @@
 <?php
 include('../config.php');
 $data = array();
-function cancelarPedido($idpedido,$prod){
+function cancelarPedido($idpedido){
+
+         $produto = MySql::conectar()->prepare("
+              SELECT *
+              FROM tb_produto_pedido PED
+              INNER JOIN tb_produto PROD
+              ON PROD.idproduto = PED.id_produto
+              WHERE id_pedido = ? AND PED.status != 0"
+          );
+          $produto->execute(array($idpedido));
+          $prod = [];
+
+          $produto = $produto->fetchAll();
+                  foreach ($produto as $key => $value){
+                    $prod[$value['idproduto']] = $value['qtd'];
+                    }
+
+
           $sql = MySql::conectar()->prepare("
             UPDATE tb_pedido
             SET status = 'R'
@@ -37,6 +54,6 @@ function cancelarPedido($idpedido,$prod){
 
          return "http://localhost/ope-final/ListaClientes";
 }
-$data['local'] = cancelarPedido($_POST['idpedido'],$_POST['produtos']);
+$data['local'] = cancelarPedido($_POST['idpedido']);
 die(json_encode($data));
 ?>

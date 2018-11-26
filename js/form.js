@@ -78,10 +78,12 @@ function formulario(form,ajax,sit){
 				case 'adicionarProd':
 					if(data.situacao == 1) produto("Produto adicionado com sucesso!",'sucess');
 					//$("#pedido tbody").html("<?php echo 'ESTE';?>");
+					$('div.carregar').html(data.html);
 					break;
 				case 'removerProd':
 					if(data.situacao == 1) situacao("Produto removido com sucesso!",'sucess');
 					//$("#pedido tbody").html("<?php echo 'ESTE';?>");
+					$('div.carregar').html(data.html);
 					break;
 				case 'senha':
 					$(".salvar").removeAttr("disabled");

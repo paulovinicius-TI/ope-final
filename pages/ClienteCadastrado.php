@@ -117,75 +117,80 @@
    </table>
 </div>
 
-<div class="w100 left" style="margin-top: 50px;">
-   <table class="table" id="pedido">
-     <thead class="thead-dark">
-       <tr>
-         <th scope="col">Cod</th>
-         <th scope="col">Produto</th>
-         <th scope="col">Quantidade</th>
-         <th scope="col">Valor Unit.</th>
-       </tr>
-     </thead>
-     <tbody>
-      <?php 
-         $produto = MySql::conectar()->prepare("
-              SELECT *
-              FROM tb_produto_pedido PED
-              INNER JOIN tb_produto PROD
-              ON PROD.idproduto = PED.id_produto
-              WHERE id_pedido = ? AND PED.status != 0"
-          );
-          $produto->execute(array($pedido['idpedido']));
-          $sql = MySql::conectar()->prepare("
-            UPDATE tb_pedido P
-            SET total = ?
-            WHERE idpedido = ?
-          ");
-          $total = 0;
-          $data = [];
-          $produto = $produto->fetchAll();
-          foreach ($produto as $key => $value):
-            $total += $value['qtd'] * $value['preco_unit'];
-            $data[$value['idproduto']] = $value['qtd'];
-        ?>
-        <tr>
-         <th scope="row"><?php echo $value['idproduto']?></th>
-         <td><?php echo $value['nome']?>
-           <form method="post" style="display: inline-block;">
-         </td>
-         <td><?php echo $value['qtd']?>
-              <input type="hidden" name="qtd" value=<?php echo $value['qtd'];?>>
-         </td>
-         <td><?php echo $value['preco_unit']?></td>
-                  <td>
-                    
-                      <input type="hidden" name="idproduto" value="<?php echo $value['idproduto']; ?>"/>
-                      <input type="hidden" name="idpedido" value="<?php echo $pedido['idpedido']; ?>"/>
 
-                      <input type="hidden" name="acao" value="remover">
-                      <input type="hidden" name="formulario" value="pedido">
+<div class="carregar">
+        <div class="w100 left" style="margin-top: 50px;">
+           <table class="table" id="pedido">
+             <thead class="thead-dark">
+               <tr>
+                 <th scope="col">Cod</th>
+                 <th scope="col">Produto</th>
+                 <th scope="col">Quantidade</th>
+                 <th scope="col">Valor Unit.</th>
+               </tr>
+             </thead>
+             <tbody>
+              <?php 
+                 $produto = MySql::conectar()->prepare("
+                      SELECT *
+                      FROM tb_produto_pedido PED
+                      INNER JOIN tb_produto PROD
+                      ON PROD.idproduto = PED.id_produto
+                      WHERE id_pedido = ? AND PED.status != 0"
+                  );
+                  $produto->execute(array($pedido['idpedido']));
+                  $sql = MySql::conectar()->prepare("
+                    UPDATE tb_pedido P
+                    SET total = ?
+                    WHERE idpedido = ?
+                  ");
+                  $total = 0;
+                  $data = [];
+                  $produto = $produto->fetchAll();
+                  foreach ($produto as $key => $value):
+                    $total += $value['qtd'] * $value['preco_unit'];
+                    $data[$value['idproduto']] = $value['qtd'];
+                ?>
+                <tr>
+                 <th scope="row"><?php echo $value['idproduto']?></th>
+                 <td><?php echo $value['nome']?>
+                   <form method="post" style="display: inline-block;">
+                 </td>
+                 <td><?php echo $value['qtd']?>
+                      <input type="hidden" name="qtd" value=<?php echo $value['qtd'];?>>
+                 </td>
+                 <td><?php echo $value['preco_unit']?></td>
+                          <td>
+                            
+                              <input type="hidden" name="idproduto" value="<?php echo $value['idproduto']; ?>"/>
+                              <input type="hidden" name="idpedido" value="<?php echo $pedido['idpedido']; ?>"/>
 
-                      <button class="btn btn-xs" title="Remover" type="submit">
-                          x
-                      </button>
-                  </form>
-                </td>
-       </tr>
-     <?php endforeach;
-     $json_php = json_encode($data);
-    $sql->execute(array($total, $pedido['idpedido']));
-    ?>
-     </tbody>
-   </table>
-   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"  >+ Produto</button>
-   <?php if($total != 0):?>
-     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalCancelarPed"  >Desistir do Pedido</button>
-     <button type="button" class="btn" onclick="gerarPedido(<?php echo $pedido['idpedido'].','.$_GET['id'];?>)">Gerar Pedido</button>
-     <?php endif;?>
-   <p class="right">Total: R$ <?php echo $total;?></p>
-</div>
-<div class="clear"></div>
+                              <input type="hidden" name="acao" value="remover">
+                              <input type="hidden" name="formulario" value="pedido">
+                              <input type="hidden" name="gerado" value="2">
+                              <input type="hidden" name="cliente" value="<?php echo $_GET['id'];?>">
+
+                              <button class="btn btn-xs" title="Remover" type="submit">
+                                  x
+                              </button>
+                          </form>
+                        </td>
+               </tr>
+             <?php endforeach;
+             $json_php = json_encode($data);
+            $sql->execute(array($total, $pedido['idpedido']));
+            ?>
+             </tbody>
+           </table>
+           <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"  >+ Produto</button>
+           <?php if($total != 0):?>
+             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalCancelarPed"  >Desistir do Pedido</button>
+             <button type="button" class="btn" onclick="gerarPedido(<?php echo $pedido['idpedido'].','.$_GET['id'];?>)">Gerar Pedido</button>
+             <?php endif;?>
+           <p class="right">Total: R$ <?php echo $total;?></p>
+        </div>
+        <div class="clear"></div>
+        </div>
       </div>
   </div>
 </div>
@@ -241,6 +246,8 @@
 
                         <input type="hidden" name="acao" value="adicionar">
                         <input type="hidden" name="formulario" value="pedido">
+                        <input type="hidden" name="gerado" value="2">
+                        <input type="hidden" name="cliente" value="<?php echo $_GET['id'];?>">
 
                         <button class="btn btn-xs" title="Adicionar" type="submit">
                             <span class="glyphicon glyphicon-plus"></span>
@@ -285,7 +292,7 @@
 
 <script type="text/javascript">
   function cancelarPedido(idpedido,produtos){
-    console.log(idpedido);
+    console.log(produtos);
       $.ajax({
         url:'<?php echo INCLUDE_PATH;?>pages/DesistirPedido.php',
         method:'post',
